@@ -1,4 +1,7 @@
 class User < ApplicationRecord
-    has_and_belongs_to_many :team
-    has_many :solve
+    has_many :team_users
+    has_many :team, through: :team_users
+    
+    has_many :chal, through: :solves
+    has_many :solves
 end

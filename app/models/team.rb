@@ -1,3 +1,9 @@
 class Team < ApplicationRecord
-    has_and_belongs_to_many :user
+    has_many :team_users
+    has_many :user, through: :team_users
+    
+    has_many :solves
+    
+    has_many :partecipate
+    has_many :ctf, through: :partecipate
 end
