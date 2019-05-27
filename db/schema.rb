@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_05_27_142804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,9 +50,15 @@ ActiveRecord::Schema.define(version: 0) do
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
-    t.string "username", limit: 30
-    t.string "password", limit: 64
-    t.string "salt", limit: 5
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
   end
 
   add_foreign_key "chals", "ctfs", name: "chals_ctf_id_fkey"
