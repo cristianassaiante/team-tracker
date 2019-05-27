@@ -35,6 +35,21 @@
             #tweets {
                 padding: 2%;
             }
+            
+            #tweets a {
+                text-decoration: none;
+                background-color: white;
+            }
+            
+            #tweets a:hover {
+                color: #333;
+            }
+            
+            #tweets li {
+                border-bottom-style: solid;
+                border-bottom-color: #E55;
+                padding: 2%;
+            }
 
             #register {
                 padding: 2%;
@@ -56,9 +71,9 @@
                     <div class="row">
                         <h1 style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
                         <div id="tweets">
-                            <ul>
+                            <ul style="list-style-type: none;">
                             <% @tweets.each do |tweet| %>
-                                <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}" %></li>
+                                <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}", target: "blank"%></li>
                             <% end %>
                             </ul>
                         </div>
