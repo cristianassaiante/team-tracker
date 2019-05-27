@@ -2,8 +2,8 @@ drop table if exists partecipates;
 drop table if exists team_users;
 drop table if exists solves;
 drop table if exists chals;
-drop table if exists teams;
 drop table if exists users;
+drop table if exists teams;
 drop table if exists ctfs;
 
 create table ctfs (id serial primary key, name varchar(40));
