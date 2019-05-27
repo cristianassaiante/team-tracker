@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <title> Home </title>
+
+        <style type="text/css">
+
+            #header {
+                background-color: #E55;
+                text-transform: uppercase;
+            }
+
+            .navbar-brand {
+                font-family: "Lucida Console", Monaco, monospace;
+            }
+            
+            #team-logo {
+                text-decoration: none;
+                background-color: #E55;
+            }
+
+            .content {
+                padding: 5%;
+            }
+
+            #tweets {
+                padding: 2%;
+            }
+
+            #register {
+                padding: 2%;
+                border-style: solid;
+                border-color: #E55;
+                border-radius: 20px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class="container-fluid">
+            <nav id="header" class="navbar navbar-static-top navbar-light">
+                <a id="team-logo" class="navbar-brand" href="/">Team Tracker</a>
+                <a class="btn btn-danger" href="/login" role="button">Sign In</a>
+            </nav>
+            <div class="row content">
+                <div class="col" style="padding: 1%">
+                    <div class="row">
+                        <h1 style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
+                        <div id="tweets">
+                            <ul>
+                            <% @tweets.each do |tweet| %>
+                                <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}" %></li>
+                            <% end %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" id="register" style="padding: 1%">
+                    <form>
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="email" class="form-control" id="username" placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-block btn-danger">Sign Up to TEAM TRACKER</button>
+                    </form>
+                    <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-danger btn-block" href="#" role="button">Google</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger btn-block" href="#" role="button">Github</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
