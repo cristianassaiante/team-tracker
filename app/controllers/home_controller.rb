@@ -6,9 +6,8 @@ class HomeController < ApplicationController
     end
     
     def index
-        @tweets =  $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(1)
-        @tweets += $twitter_client.search("#defcon", result_type: "recent", lang: "en").first(2)
-        @tweets += $twitter_client.search("#blackhat", result_type: "recent", lang: "en").first(2)
+        @tweets =  $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(2)
+        @tweets += $twitter_client.search("#defcon", result_type: "recent", lang: "en").first(3)
     end
     
     def create
