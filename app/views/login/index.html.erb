@@ -46,9 +46,11 @@
                 <div class="center-block">
                     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|%>   
                         <%= render "devise/shared/error_messages", resource: resource %>
-                        <% if flash[:password_error] %>
-                            <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:password_error] %></p>
+                        <% if flash[:login_error] %>
+                            <p class="notice" style="color:#212529;font-size:110%;"><%= flash[:login_error] %></p>
                         <% end %>
+                        <p class="notice" style="color:#212529;font-size:110%;"><%= notice %></p>
+                        <p class="notice" style="color:#212529;font-size:110%;"><%= alert %></p>
                         <div class="field form-group">
                             <%= f.label :email %><br />
                             <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>

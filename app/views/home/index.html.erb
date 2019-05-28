@@ -81,6 +81,9 @@
                 </div>
             </div>
             
+            <% if flash[:logged_in] %>
+                <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:logged_in] %></p>
+            <% end %>
         
             <div class="col" id="register" style="padding: 1%">
                 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|%>
@@ -103,7 +106,7 @@
                         <% if @minimum_password_length %>
                         <em>(<%= @minimum_password_length %> characters minimum)</em>
                         <% end %><br />
-                        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password", :pattern => "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", :title => "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", :required=>"required"%>
+                        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password", :pattern => "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", :title => "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", :required=>"required"%>
                     </div>
 
                     <div class="field form-group">
