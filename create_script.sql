@@ -8,7 +8,7 @@ drop table if exists ctfs;
 
 create table ctfs (id serial primary key, name varchar(40));
 create table teams (id serial primary key, name varchar(40));
-create table users (id serial primary key, username varchar not null default '', email varchar not null default '', encrypted_password varchar not null default '', reset_password_token varchar, reset_password_sent_at timestamp, remember_created_at timestamp, confirmation_token varchar, confirmed_at timestamp, confirmation_sent_at timestamp, unconfirmed_email varchar);
+create table users (id serial primary key, username varchar not null default '', email varchar not null default '', encrypted_password varchar not null default '', reset_password_token varchar, reset_password_sent_at timestamp, remember_created_at timestamp, confirmation_token varchar, confirmed_at timestamp, confirmation_sent_at timestamp, unconfirmed_email varchar, provider varchar, uid varchar);
 
 create table chals (
   id serial primary key,
