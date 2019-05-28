@@ -11,6 +11,14 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
     devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable, :omniauthable, :confirmable, omniauth_providers: [:github]
+
+    protected
+    def confirmation_required?
+        if self.provider.nil?
+            return true
+        end
+        false
+    end
     
     validates :password, 
         presence: true, 
