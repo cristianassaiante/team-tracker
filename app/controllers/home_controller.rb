@@ -33,7 +33,8 @@ class HomeController < ApplicationController
             return
         else
             @user.save
-            render plain: 'Registrazione avvenuta, email inviata' + @user.to_s
+            flash[:good_registration] = "Registration succedeed, confimation email sent!"
+            redirect_to home_path
         end
     end
     

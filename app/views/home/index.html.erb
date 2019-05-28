@@ -28,9 +28,16 @@
                 background-color: #E55;
             }
 
-            .content {
-                padding: 5%;
-            }
+            <% if current_user.present? %>
+                .content {
+                    padding: 5%;
+                    padding-top: 10%;
+                }
+            <% else %>
+                .content {
+                    padding: 5%;
+                }
+            <% end %>
 
             #tweets {
                 padding: 2%;
@@ -65,70 +72,97 @@
     <body>
         <nav id="header" class="navbar navbar-static-top navbar-light">
             <a id="team-logo" class="navbar-brand" href="/">Team Tracker</a>
-            <a style="color: white;" class="btn btn-danger" href="/login" role="button">Sign In</a>
-        </nav>
-        <div class="row content">
-            <div class="col" style="padding: 1%">
-                <div class="row">
-                    <h1 style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
-                    <div id="tweets">
-                        <ul style="list-style-type: none;">
-                        <% @tweets.each do |tweet| %>
-                            <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}", target: "blank"%></li>
-                        <% end %>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <% if flash[:logged_in] %>
-                <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:logged_in] %></p>
+            <% if current_user.present? %>
+                <h5><%= current_user.username %></h5>
+            <% else %>
+                <a style="color: white;" class="btn btn-danger" href="/login" role="button">Sign In</a>
             <% end %>
-        
-            <div class="col" id="register" style="padding: 1%">
-                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|%>
-                    <%= render "devise/shared/error_messages", resource: resource %>
-                    <% if flash[:password_error] %>
-                        <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:password_error] %></p>
+        </nav>           
+        <% if current_user.present? %>
+            <div class="row content">
+                <div class="col" style="padding: 1%">
+                    <h1 style="padding: 1%">Create a new team</h1>
+                    <form>
+                        <div class="form-group">
+                            <label for="teamname">Email address</label>
+                            <input type="teamname" class="form-control" id="teamname" placeholder="Enter team name">
+                        </div>
+                        <button type="submit" class="btn btn-danger">Create</button>
+                    </form>
+                </div>
+                <div class="col" style="padding: 1%">
+                    <h1 style="padding: 1%">Join an existing team</h1>
+                    <form>
+                        <div class="form-group">
+                            <label for="teamtoken">Email address</label>
+                            <input type="teamtoken" class="form-control" id="teamtoken" placeholder="Enter team token">
+                        </div>
+                        <button type="submit" class="btn btn-danger">Join</button>
+                    </form>
+                </div>
+            </div>
+        <% else %>
+            <div class="row content">
+                <div class="col" style="padding: 1%">
+                    <div class="row">
+                        <h1 style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
+                        <div id="tweets">
+                            <ul style="list-style-type: none;">
+                            <% @tweets.each do |tweet| %>
+                                <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}", target: "blank"%></li>
+                            <% end %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col" id="register" style="padding: 1%">
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|%>
+                        <%= render "devise/shared/error_messages", resource: resource %>
+                        <% if flash[:password_error] %>
+                            <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:password_error] %></p>
+                        <% end %>
+                        <% if flash[:good_registration] %>
+                            <p class="notice" style="color:#000;font-size:110%;"><%= flash[:good_registration] %></p>
+                        <% end %>
+                        <div class="field form-group">
+                            <%= f.label :username %><br />
+                            <%= f.text_field :username, autofocus: true, autocomplete: "username", :class => "form-control", :placeholder => "Enter username", :required=>"required"%>
+                        </div>
+                        
+                        <div class="field form-group">
+                            <%= f.label :email %><br />
+                            <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>
+                        </div>
+
+                        <div class="field form-group">
+                            <%= f.label :password %>
+                            <% if @minimum_password_length %>
+                            <em>(<%= @minimum_password_length %> characters minimum)</em>
+                            <% end %><br />
+                            <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password", :pattern => "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", :title => "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", :required=>"required"%>
+                        </div>
+
+                        <div class="field form-group">
+                            <%= f.label :password_confirmation %><br />
+                            <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Re-Enter password", :required=>"required" %>
+                        </div>
+
+                        <div class="actions form-group">
+                            <%= f.submit "Sign up to TEAM TRACKER", :class => "btn btn-block btn-danger" %>
+                        </div>
                     <% end %>
-                    <div class="field form-group">
-                        <%= f.label :username %><br />
-                        <%= f.text_field :username, autofocus: true, autocomplete: "username", :class => "form-control", :placeholder => "Enter username", :required=>"required"%>
-                    </div>
                     
-                    <div class="field form-group">
-                        <%= f.label :email %><br />
-                        <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>
-                    </div>
-
-                    <div class="field form-group">
-                        <%= f.label :password %>
-                        <% if @minimum_password_length %>
-                        <em>(<%= @minimum_password_length %> characters minimum)</em>
-                        <% end %><br />
-                        <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password", :pattern => "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", :title => "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", :required=>"required"%>
-                    </div>
-
-                    <div class="field form-group">
-                        <%= f.label :password_confirmation %><br />
-                        <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Re-Enter password", :required=>"required" %>
-                    </div>
-
-                    <div class="actions form-group">
-                        <%= f.submit "Sign up to TEAM TRACKER", :class => "btn btn-block btn-danger" %>
-                    </div>
-                <% end %>
-                
-                <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
-                <div class="row">
-                    <div class="col">
-                        <a style="color: white;" class="btn btn-danger btn-block" href="#" role="button">Google</a>
-                    </div>
-                    <div class="col">
-                        <a style="color: white;" class="btn btn-danger btn-block" href="#" role="button">Github</a>
+                    <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
+                    <div class="row">
+                        <div class="col">
+                            <a style="color: white;" class="btn btn-danger btn-block" href="#" role="button">Google</a>
+                        </div>
+                        <div class="col">
+                            <a style="color: white;" class="btn btn-danger btn-block" href="#" role="button">Github</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <% end %>
     </body>
 </html>
