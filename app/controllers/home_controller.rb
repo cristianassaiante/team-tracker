@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     def index
         @tweets =  $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(2)
         @tweets += $twitter_client.search("#defcon", result_type: "recent", lang: "en").first(3)
+        @minimum_password_length = 8
     end
     
     def create
@@ -17,11 +18,21 @@ class HomeController < ApplicationController
         @password = user_params[:password]
         @user = User.new(username: @username, email: @email, password: @password)
         
-        if !@user.valid? || !params[:user][:password] == params[:user][:password_confirmation]
-            render plain: 'registrazione non riuscita'
+        if params[:user][:password].length < 8
+            puts "Rendering password short"
+            flash[:password_error] = "Password is too short"
+            redirect_to home_path
+            return
+        end
+        
+        if !@user.valid? || params[:user][:password] != params[:user][:password_confirmation]
+
+            flash[:password_error] = "Password must contain at least one number, one uppercase and lowercase letter, at least 8 or more characters and must match with password confirmation"
+            redirect_to home_path
+            return
         else
             @user.save
-            render plain: 'registrazione avvenuta, email inviata' + @user.to_s
+            render plain: 'Registrazione avvenuta, email inviata' + @user.to_s
         end
     end
     

@@ -10,10 +10,6 @@
 
         <style type="text/css">
 
-            body {
-                overflow-x: hidden;
-            }
-        
             a {
                 color: #000;
             }
@@ -37,7 +33,6 @@
             }
 
             #tweets {
-                margin-right: 10%;
                 padding: 2%;
             }
             
@@ -66,62 +61,68 @@
 
     </head>
     <body>
-        <nav id="header" class="navbar navbar-static-top navbar-light">
-            <a id="team-logo" class="navbar-brand" href="/home">Team Tracker</a>
-            <a class="btn btn-danger" style="color: #FFF;" href="/login" role="button">Sign In</a>
-        </nav>
-        <div class="row content">
-            <div class="col" style="padding: 1%">
-                <div class="row">
-                    <h1 style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
-                    <div id="tweets">
-                        <ul style="list-style-type: none;">
-                        <% @tweets.each do |tweet| %>
-                            <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}", target: "blank"%></li>
-                        <% end %>
-                        </ul>
+        <div class="container-fluid">
+            <nav id="header" class="navbar navbar-static-top navbar-light">
+                <a id="team-logo" class="navbar-brand" href="/">Team Tracker</a>
+                <a class="btn btn-danger" href="/login" role="button">Sign In</a>
+            </nav>
+            <div class="row content">
+                <div class="col" style="padding: 1%">
+                    <div class="row">
+                        <h1 style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
+                        <div id="tweets">
+                            <ul style="list-style-type: none;">
+                            <% @tweets.each do |tweet| %>
+                                <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}", target: "blank"%></li>
+                            <% end %>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col" id="register" style="padding: 1%">
-                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                    <%= render "devise/shared/error_messages", resource: resource %>
-                        
-                        <div class="field form-group">
-                            <%= f.label :username %><br />
-                            <%= f.text_field :username, autofocus: true, autocomplete: "username", :class => "form-control", :placeholder => "Enter username" %>
-                        </div>
-                        
-                        <div class="field form-group">
-                            <%= f.label :email %><br />
-                            <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address" %>
-                        </div>
-
-                        <div class="field form-group">
-                            <%= f.label :password %>
-                            <% if @minimum_password_length %>
-                            <em>(<%= @minimum_password_length %> characters minimum)</em>
-                            <% end %><br />
-                            <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password" %>
-                        </div>
-
-                        <div class="field form-group">
-                            <%= f.label :password_confirmation %><br />
-                            <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Re-Enter password" %>
-                        </div>
-
-                        <div class="actions form-group">
-                            <%= f.submit "Sign up to TEAM TRACKER", :class => "btn btn-block btn-danger" %>
-                        </div>
-                <% end %>
                 
-                <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
-                <div class="row">
-                    <div class="col">
-                        <a class="btn btn-danger btn-block" style="color: #FFF;" href="#" role="button">Google</a>
-                    </div>
-                    <div class="col">
-                        <a class="btn btn-danger btn-block" style="color: #FFF;" href="#" role="button">Github</a>
+            
+                <div class="col" id="register" style="padding: 1%">
+                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|%>
+                        <%= render "devise/shared/error_messages", resource: resource %>
+                            <% if flash[:password_error] %>
+                <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:password_error] %></p>
+            <% end %>
+                            <div class="field form-group">
+                                <%= f.label :username %><br />
+                                <%= f.text_field :username, autofocus: true, autocomplete: "username", :class => "form-control", :placeholder => "Enter username", :required=>"required"%>
+                            </div>
+                            
+                            <div class="field form-group">
+                                <%= f.label :email %><br />
+                                <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>
+                            </div>
+
+                            <div class="field form-group">
+                                <%= f.label :password %>
+                                <% if @minimum_password_length %>
+                                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                                <% end %><br />
+                                <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password", :pattern => "(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", :title => "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", :required=>"required"%>
+                            </div>
+
+                            <div class="field form-group">
+                                <%= f.label :password_confirmation %><br />
+                                <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Re-Enter password", :required=>"required" %>
+                            </div>
+
+                            <div class="actions form-group">
+                                <%= f.submit "Sign up to TEAM TRACKER", :class => "btn btn-block btn-danger" %>
+                            </div>
+                    <% end %>
+                    
+                    <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
+                    <div class="row">
+                        <div class="col">
+                            <a class="btn btn-danger btn-block" href="#" role="button">Google</a>
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-danger btn-block" href="#" role="button">Github</a>
+                        </div>
                     </div>
                 </div>
             </div>
