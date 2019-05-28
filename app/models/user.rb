@@ -6,6 +6,7 @@ class User < ApplicationRecord
         (?=.*[a-z])        # minuscolo
         (?=.*[A-Z])        # maiuscolo
         /x
+        
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
     devise :database_authenticatable, :registerable,
@@ -18,11 +19,20 @@ class User < ApplicationRecord
         confirmation: true, 
         on: :create 
 
-        validates :password, 
-        allow_nil: true, 
+    validates :password, 
         length: { in: 6..40}, 
         format: { with: PASSWORD_FORMAT }, 
         confirmation: true, 
+        on: :update
+    
+      validates :email, 
+        presence: true, 
+        format: { with: Devise::email_regexp }, 
+        on: :create 
+
+    validates :email, 
+        presence: true, 
+        format: { with: Devise::email_regexp }, 
         on: :update
     
     has_many :team_users
