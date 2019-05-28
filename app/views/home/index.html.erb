@@ -74,6 +74,7 @@
             <a id="team-logo" class="navbar-brand" href="/">Team Tracker</a>
             <% if current_user.present? %>
                 <h5><%= current_user.username %></h5>
+                <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger", :style => "color: white;") %>  
             <% else %>
                 <a style="color: white;" class="btn btn-danger" href="/login" role="button">Sign In</a>
             <% end %>

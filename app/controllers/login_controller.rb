@@ -25,6 +25,11 @@ class LoginController < ApplicationController
         end
     end
     
+    def destroy
+        sign_out(@user)
+        redirect_to home_path
+    end
+    
     def new
         redirect_to '/login'
     end
