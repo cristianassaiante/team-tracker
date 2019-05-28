@@ -6,7 +6,8 @@ class HomeController < ApplicationController
     end
     
     def index
-        @tweets =  $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(2)
+        @tweets = []
+        @tweets += $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(2)
         @tweets += $twitter_client.search("#defcon", result_type: "recent", lang: "en").first(3)
         @minimum_password_length = 8
     end
