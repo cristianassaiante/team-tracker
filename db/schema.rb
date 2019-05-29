@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_184553) do
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
+    t.boolean "is_admin", default: false, null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

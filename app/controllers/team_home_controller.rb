@@ -15,7 +15,16 @@ class TeamHomeController < ApplicationController
         else
             @team.save
             current_user.update_attribute(:team_id, @team.id)
+            current_user.update_attribute(:is_admin, true)
             
+            redirect_to teamhome_path
+        end
+    end
+    
+    def join
+        @team = Team.find_by(token: params[:teamtoken])
+        if @team
+            current_user.update_attribute(:team_id, @team.id)
             redirect_to teamhome_path
         end
     end
