@@ -156,7 +156,7 @@
                     <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
                     <div class="row">
                         <div class="col">
-                            <a style="color: white;" class="btn btn-danger btn-block" href="#" role="button">Google</a>
+                          <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, style: "color: white;", class: "btn btn-danger btn-block", role: "button" %>
                         </div>
                         <div class="col">
                             <%= link_to "Github", user_github_omniauth_authorize_path, style: "color: white;", class: "btn btn-danger btn-block", role: "button" %>
