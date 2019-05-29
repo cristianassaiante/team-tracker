@@ -1,5 +1,4 @@
 drop table if exists partecipates;
-drop table if exists team_users;
 drop table if exists solves;
 drop table if exists chals;
 drop table if exists users;
@@ -7,8 +6,8 @@ drop table if exists teams;
 drop table if exists ctfs;
 
 create table ctfs (id serial primary key, name varchar(40));
-create table teams (id serial primary key, name varchar(40));
-create table users (id serial primary key, username varchar not null default '', email varchar not null default '', encrypted_password varchar not null default '', reset_password_token varchar, reset_password_sent_at timestamp, remember_created_at timestamp, confirmation_token varchar, confirmed_at timestamp, confirmation_sent_at timestamp, unconfirmed_email varchar, provider varchar, uid varchar);
+create table teams (id serial primary key, name varchar(40), token varchar(64), unique(name));
+create table users (id serial primary key, username varchar not null default '', email varchar not null default '', encrypted_password varchar not null default '', reset_password_token varchar, reset_password_sent_at timestamp, remember_created_at timestamp, confirmation_token varchar, confirmed_at timestamp, confirmation_sent_at timestamp, unconfirmed_email varchar, provider varchar, uid varchar, team_id integer, foreign key(team_id) references teams(id));
 
 create table chals (
   id serial primary key,
@@ -25,16 +24,6 @@ create table solves (
   unique(user_id, chal_id, team_id),
   foreign key(user_id) references users(id),
   foreign key(chal_id) references chals(id),
-  foreign key(team_id) references teams(id)
-);
-
-create table team_users (
-  id serial primary key,
-  user_id integer,
-  team_id integer,
-  as_admin boolean,
-  unique(user_id, team_id),
-  foreign key(user_id) references users(id),
   foreign key(team_id) references teams(id)
 );
 

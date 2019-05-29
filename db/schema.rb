@@ -38,15 +38,10 @@ ActiveRecord::Schema.define(version: 2019_05_28_184553) do
     t.index ["user_id", "chal_id", "team_id"], name: "solves_user_id_chal_id_team_id_key", unique: true
   end
 
-  create_table "team_users", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "team_id"
-    t.boolean "as_admin"
-    t.index ["user_id", "team_id"], name: "team_users_user_id_team_id_key", unique: true
-  end
-
   create_table "teams", id: :serial, force: :cascade do |t|
     t.string "name", limit: 40
+    t.string "token", limit: 64
+    t.index ["name"], name: "teams_name_key", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -62,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_184553) do
     t.string "unconfirmed_email"
     t.string "provider"
     t.string "uid"
+    t.integer "team_id"
   end
 
   add_foreign_key "chals", "ctfs", name: "chals_ctf_id_fkey"
@@ -70,6 +66,5 @@ ActiveRecord::Schema.define(version: 2019_05_28_184553) do
   add_foreign_key "solves", "chals", name: "solves_chal_id_fkey"
   add_foreign_key "solves", "teams", name: "solves_team_id_fkey"
   add_foreign_key "solves", "users", name: "solves_user_id_fkey"
-  add_foreign_key "team_users", "teams", name: "team_users_team_id_fkey"
-  add_foreign_key "team_users", "users", name: "team_users_user_id_fkey"
+  add_foreign_key "users", "teams", name: "users_team_id_fkey"
 end

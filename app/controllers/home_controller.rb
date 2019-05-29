@@ -6,10 +6,14 @@ class HomeController < ApplicationController
     end
     
     def index
-        @tweets = []
-        @tweets += $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(2)
-        @tweets += $twitter_client.search("#defcon", result_type: "recent", lang: "en").first(3)
-        @minimum_password_length = 8
+        if current_user.present? && current_user.team_id
+            redirect_to teamhome_path
+        else
+            @tweets = []
+            @tweets += $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(2)
+            @tweets += $twitter_client.search("#defcon", result_type: "recent", lang: "en").first(3)
+            @minimum_password_length = 8
+        end
     end
     
     def create

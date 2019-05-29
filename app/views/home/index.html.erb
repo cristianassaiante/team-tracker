@@ -83,10 +83,13 @@
             <div class="row content">
                 <div class="col" style="padding: 1%">
                     <h1 style="padding: 1%">Create a new team</h1>
-                    <form>
+                    <form action="/teamhome" method="POST">
                         <div class="form-group">
-                            <label for="teamname">Email address</label>
-                            <input type="teamname" class="form-control" id="teamname" placeholder="Enter team name">
+                            <label for="teamname">Team name</label>
+                            <input name="teamname" type="teamname" class="form-control" id="teamname" placeholder="Enter team name" required="required">
+                            <% if flash[:create_error] %>
+                                <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:create_error] %></p>
+                            <% end %>
                         </div>
                         <button type="submit" class="btn btn-danger">Create</button>
                     </form>
@@ -95,8 +98,11 @@
                     <h1 style="padding: 1%">Join an existing team</h1>
                     <form>
                         <div class="form-group">
-                            <label for="teamtoken">Email address</label>
-                            <input type="teamtoken" class="form-control" id="teamtoken" placeholder="Enter team token">
+                            <label for="teamtoken">Team token</label>
+                            <input name="teamtoken" type="teamtoken" class="form-control" id="teamtoken" placeholder="Enter team token" required="required">
+                            <% if flash[:join_error] %>
+                                <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:join_error] %></p>
+                            <% end %>
                         </div>
                         <button type="submit" class="btn btn-danger">Join</button>
                     </form>

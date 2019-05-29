@@ -43,8 +43,7 @@ class User < ApplicationRecord
         format: { with: Devise::email_regexp }, 
         on: :update
     
-    has_many :team_users
-    has_many :team, through: :team_users
+    has_one :team
     
     has_many :chal, through: :solves
     has_many :solves
