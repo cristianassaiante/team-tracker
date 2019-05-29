@@ -7,7 +7,6 @@ class LoginController < ApplicationController
         @email = params[:user][:email]
         @password = params[:user][:password]
         @user = @email.present? && User.find_by(email: @email)
-        puts "CALLED CREATE"
         if @user && @user.valid_password?(@password)
             @user.remember_me = params[:user][:remember_me] == '0' ? false : true
             sign_in(@user)

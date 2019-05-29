@@ -6,7 +6,9 @@ Rails.application.routes.draw do
     get '/teamhome', to: 'team_home#index'
     post '/teamhome/create', to: 'team_home#create'
     post '/teamhome/join', to: 'team_home#join'
+    post '/teamhome/newtoken', to: 'team_home#new_token'
     get '/login', to: 'login#index'
+    
     
     root :to => redirect('/home')
     

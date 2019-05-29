@@ -1,5 +1,6 @@
-<p>Salve, <%= @email %></p>
 
-<p>Puoi confermare l'account cliccando sul link:</p>
+<p style="color:#E55;font-size: 110%;">Welcome, <%= @email %></p>
 
-<p><%= link_to 'Crea lo account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p style="color:#E55;font-size: 110%;">Please confirm your account:</p>
+
+<p style="color:#E55;font-size: 110%;"><%= link_to 'Click here', confirmation_url(@resource, confirmation_token: @token) %></p>

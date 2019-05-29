@@ -13,6 +13,15 @@
 
     </head>
     <body>
-        <h1> TEAM HOME </h1> <!-- Provvisory code -->
+        <h1> TEAM HOME </h1>
+        <% if flash[:token_info] %>
+            <p class="notice" style="color:#E55;font-size:110%;">Your team token is: <%= flash[:token_info] %></p>
+        <% end %>
+        <% if current_user.is_admin %>
+            <form action="/teamhome/newtoken" method="POST">
+                <button type="submit" class="btn btn-danger">Get token</button>
+            </form>
+        <% end %>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger", :style => "color: white;") %>
     </body>
 </html>
