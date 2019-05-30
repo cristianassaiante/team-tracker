@@ -7,6 +7,8 @@ class TeamHomeController < ApplicationController
             flash[:create_error] = "You have to create a team before access the team home"
             flash[:join_error] = "You have to join a team before access the team home"
             redirect_to home_path
+        else
+            @team = Team.find_by(id: current_user.team_id)
         end
     end
     
@@ -36,7 +38,7 @@ class TeamHomeController < ApplicationController
            flash[:token_info] = @token.unpack("H*")[0]
            redirect_to teamhome_path
         else
-           flash[:token_info] = "Unauthorized" 
+           flash[:token_i] = "Unauthorized" 
         end
     end
     
