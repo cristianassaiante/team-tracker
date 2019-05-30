@@ -163,6 +163,31 @@
                 <!-- HERE GOES THE CONTENT OF THE PAGE -->
                 <!-- The list of team mates with ban button for admin -->
                 <!-- The list of latest played ctfs -->
+                <div class="col">
+                    <form action="/challenges/create" method="POST">
+                        <select name="ctf_name">
+                            <% @ctfs.each do |ctf| %>
+                                <option value="<%= ctf %>"><%= ctf %></option>
+                            <% end %>
+                        </select>
+                        <br><br><br>
+                        <label for="chall_name">Challenge</label>
+                        <input name="chall_name" type="text" class="form-control" id="chall_name" placeholder="Enter chall name" required="required">
+                        <br><br>
+                        <select name="category">
+                            <option value="Crypto">Crypto</option>
+                            <option value="Reverse">Reverse</option>
+                            <option value="Pwn">Pwn</option>
+                            <option value="Web">Web</option>
+                            <option value="Misc">Misc</option>
+                        </select>
+                        <br><br>
+                        <label for="points">Points</label>
+                        <input name="points" type="text" class="form-control" id="points" placeholder="Points" required="required">
+                        <br><br>
+                        <button type="submit" class="btn btn-danger btn-block">Submit</button> 
+                    </form>
+                </div>
             </div>
 
         </div>

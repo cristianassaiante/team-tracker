@@ -18,11 +18,16 @@ ActiveRecord::Schema.define(version: 2019_05_27_142804) do
   create_table "chals", id: :serial, force: :cascade do |t|
     t.integer "ctf_id"
     t.string "name", limit: 40
+    t.integer "points"
+    t.text "categ"
     t.index ["ctf_id", "name"], name: "chals_ctf_id_name_key", unique: true
   end
 
   create_table "ctfs", id: :serial, force: :cascade do |t|
     t.string "name", limit: 40
+    t.boolean "onsite"
+    t.string "location"
+    t.index ["name"], name: "ctfs_name_key", unique: true
   end
 
   create_table "partecipates", id: false, force: :cascade do |t|
@@ -35,6 +40,7 @@ ActiveRecord::Schema.define(version: 2019_05_27_142804) do
     t.integer "user_id"
     t.integer "chal_id"
     t.integer "team_id"
+    t.boolean "is_pending", default: true
     t.index ["user_id", "chal_id", "team_id"], name: "solves_user_id_chal_id_team_id_key", unique: true
   end
 
