@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     
     post '/users/ban', to: 'users#ban'
     
+    get '/profile', to: 'profile#index'
+    get '/settings', to: 'settings#index'
+    
     root :to => redirect('/home')
     
 end

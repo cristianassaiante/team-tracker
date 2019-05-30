@@ -6,7 +6,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title> Team Home </title>
+        <title> Profile </title>
 
         <style type="text/css">
         #header {
@@ -133,6 +133,7 @@
                     </form>
                 <% end %>
                 <a href="/profile" id="btn-sidebar" class="btn btn-danger btn-block">Profile</a>
+                <a href="/settings" id="btn-sidebar" class="btn btn-danger btn-block">Settings</a>
             </div>
             </div>
             <!-- /#sidebar-wrapper -->
@@ -157,48 +158,7 @@
             </nav>
             
             <div class="content">
-                <% if flash[:token_info] %>
-                    <p class="notice" style="color:#E55;font-size:110%;">Your team token is: <%= flash[:token_info] %></p>
-                <% end %>
-                
-                <h2>Users</h2>
-                <hr>
-                <div class="row">
-                    <ul style="list-style-type: none;">
-                        <% @team_users.each do |user| %>
-                            <li>
-                                <form action="/users/ban" method="POST">
-                                    <h4>
-                                        <%= user.username %>
-                                        <% if user.is_admin %>
-                                            <p> admin </p>
-                                        <% end %>
-                                        <% if current_user.is_admin && current_user.id != user.id%>
-                                            <input type="hidden" name="id_to_ban" value="<%= user.id %>"/>
-                                            <button style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-danger">Ban</button>
-                                        <% end %>
-                                    </h4>
-                                </form>
-                            </li>
-                        <% end %>
-                    </ul>
-                </div>
-                <h2>Latest CTFs</h2>
-                <hr>
-                <div class="row">
-                    <ul style="list-style-type: none;">
-                        <% @ctfs.each do |ctf| %>
-                            <li>
-                                <h4>
-                                    <%= ctf.name %>
-                                    <% if ctf.onsite %>
-                                        <button style="margin-bottom: 5%;" id="btn-sidebar" class="btn btn-danger">View location</button>
-                                    <% end %>
-                                </h4>
-                            </li>
-                        <% end %>
-                    </ul>
-                </div>
+                <h1>SETTINGS</h1>
             </div>
 
         </div>
