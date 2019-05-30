@@ -1,4 +1,5 @@
-class UsersController < ApplicationController
+class UsersController < Devise::RegistrationsController
+    before_action :authenticate_user!, :except => [:create]
     
     def ban
         @to_ban = params[:id_to_ban]
