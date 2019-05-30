@@ -9,6 +9,19 @@ class TeamHomeController < ApplicationController
             redirect_to home_path
         else
             @team = Team.find_by(id: current_user.team_id)
+            
+            @team_users = User.where(team_id: @team.id)
+            @solves = Solve.where(team_id: @team.id)
+            
+            @ctfs = []
+            for idx in 0..(@solves.length-1 % 5)
+                p @solves[idx]
+                @chal = Chal.find_by(id: @solves[idx].chal_id)
+                @ctf = Ctf.find_by(id: @chal.ctf_id)
+                if !@ctfs.include? @ctf
+                    @ctfs.push(@ctf)
+                end
+            end
         end
     end
     
