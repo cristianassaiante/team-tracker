@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-    devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: 'home', sessions: 'login', confirmations: 'confirmation' }
+    devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: 'users', sessions: 'login', confirmations: 'confirmation' }
     
     
     get '/home', to: 'home#index'
@@ -15,8 +15,6 @@ Rails.application.routes.draw do
     get '/challenges', to: 'challenges#index'
     post '/challenges/create', to: 'challenges#create'
     
-    get '/users', to: 'users#show'
-    get '/users/settings', to: 'users#edit'
     post '/users/ban', to: 'users#ban'
     
     root :to => redirect('/home')

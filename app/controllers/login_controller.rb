@@ -7,14 +7,23 @@ class LoginController < ApplicationController
         @email = params[:user][:email]
         @password = params[:user][:password]
         @user = @email.present? && User.find_by(email: @email)
+        
         if @user && @user.valid_password?(@password)
             @user.remember_me = params[:user][:remember_me] == '0' ? false : true
             sign_in(@user)
             
             redirect_to home_path
         else
-            flash[:login_error] = @user ? "Please confirm your email" : "Invalid email or password"
-            redirect_to '/login'
+            if !@user
+                flash[:login_error] = "Email not valid"
+            else
+                if @user.confirmed_at
+                    flash[:login_error] = "Invalid email or password"
+                else
+                    flash[:login_error] = "P"
+                end
+            end
+            redirect_to login_path
         end
     end
     
@@ -24,6 +33,6 @@ class LoginController < ApplicationController
     end
     
     def new
-        redirect_to '/login'
+        redirect_to login_path
     end
 end

@@ -61,7 +61,7 @@
         }
 
         #btn-sidebar {
-        margin-top: 10%;
+        margin-top: 5%;
         color: white;
         }
         
@@ -122,11 +122,11 @@
 
             <!-- Sidebar -->
             <div class="border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading"><a class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" href="/teamhome"><%= @team.name %></a></div>
+            <div class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" class="sidebar-heading" href="/teamhome"><%= @team.name %></a></div>
             <div class="list-group list-group-flush">
                 <a href="#" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Team Stats</a>
-                <a href="/challenges" id="btn-sidebar" class="btn btn-danger btn-block">Add <br> challenge</a>
+                <a href="/challenges" id="btn-sidebar" class="btn btn-danger btn-block">Add challenge</a>
                 <% if current_user.is_admin %>
                     <form action="/teamhome/newtoken" method="POST">
                         <button id="btn-sidebar" type="submit" class="btn btn-danger btn-block">Get token</button>
