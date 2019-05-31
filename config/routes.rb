@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     post '/team/newtoken', to: 'team_home#new_token'
     get  '/team/stat', to: 'team_stat#index'
     post '/team/notification', to: 'team_home#notifications'
+    put '/team/edit', to: 'team_home#update'
+    get '/team/edit', to: 'settings#index'
     
     get  '/login', to: 'login#index'
     
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
     post '/users/ban', to: 'team_home#ban'
     get  '/users/profile', to: 'profile#index'
     get  '/users/settings', to: 'settings#index'
+
+    put '/profile/edit', to: 'profile#update'
     
     post '/ctfs/maps', to: 'team_home#maps'
     

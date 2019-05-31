@@ -122,7 +122,7 @@
 
             <!-- Sidebar -->
             <div class="border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" class="sidebar-heading" href="/teamhome"><%= @team.name %></a></div>
+                <div class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" class="sidebar-heading" href="/team/home"><%= @team.name %></a></div>
             <div class="list-group list-group-flush">
                 <a href="/users/stat" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
                 <a href="/team/stat" class="list-group-item list-group-item-action bg-light">Team Stats</a>
@@ -158,7 +158,87 @@
             </nav>
             
             <div class="content">
-                <h1>SETTINGS</h1>
+              <p id="user_header"><h1>Settings</h1></p>
+              <p id="user_info">
+                <% if current_user.provider.nil? %>
+                  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+
+                    <div class="field">
+                      <%= f.label :email %><br />
+                      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', value: current_user.email%>
+                      <% if flash[:email_blank_error] %>
+                      <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:email_blank_error] %></p>
+                    <% end %>
+                    </div>
+
+                    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+                    <% end %>
+
+                    <div class="field">
+                      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control'%>
+                      <% if flash[:password_length_error] %>
+                        <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:password_length_error] %></p>
+                      <% end %>
+                      <% if flash[:password_error] %>
+                        <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:password_error] %></p>
+                      <% end %>
+                    </div>
+
+                    <div class="field">
+                      <%= f.label :password_confirmation %><br />
+                      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+                      <% if flash[:password_match_error] %>
+                        <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:password_match_error] %></p>
+                      <% end %>
+                    </div>
+
+                    <div class="field">
+                      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                      <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+                      <% if flash[:current_password_error] %>
+                        <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:current_password_error] %></p>
+                      <% end %>
+                    </div>
+                    <div class="actions">
+                      <%= f.submit "Update", class: "btn btn-danger" %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <div>
+                    <h5> You are authenticated with <%= current_user.provider.to_s.humanize %>, you cannot edit email or password.</h5>
+                  </div>
+
+                <% end %>
+                </p>
+
+                <% if current_user.is_admin %>
+                  <div class="team_settings">
+                    <%= form_for(:team, url: '/team/edit', html: { method: :put }) do |t| %>
+                      <div class="field">
+                        <%= t.label 'Team name' %><br>
+                        <%= t.text_field :name, autofocus: false, class: 'form-control' %>
+                        <% if flash[:team_name_blank_error] %>
+                          <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:team_name_blank_error] %></p>
+                        <% end %>
+                        <% if flash[:team_name_exist_error] %>
+                          <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:team_name_exist_error] %></p>
+                        <% end %>
+                      </div>
+                      <div class="check_box">
+                        <%= t.check_box :need_chal_confirmation %>
+                        <%= t.label 'Submission policy (check if you want notification by teammates challenges submission)   ' %><br>
+                        <span class="checkmark"></span>
+                      </div>
+                      <div class="actions">
+                        <%= t.submit "Update", class: 'btn btn-danger' %>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>
+
+                <p><%= button_to "Delete account", registration_path(resource_name), data: { confirm: "Are you sure :( ?" }, method: :delete, class:'btn btn-danger' %></p>
             </div>
 
         </div>

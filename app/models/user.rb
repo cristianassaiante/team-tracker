@@ -31,7 +31,7 @@ class User < ApplicationRecord
         length: { in: 6..40}, 
         format: { with: PASSWORD_FORMAT }, 
         confirmation: true, 
-        on: :update
+        on: :update, allow_blank: true
     
       validates :email, 
         presence: true, 
@@ -42,6 +42,11 @@ class User < ApplicationRecord
         presence: true, 
         format: { with: Devise::email_regexp }, 
         on: :update
+
+    validates :username,
+              presence: true,
+              uniqueness: true,
+              on: :update
     
     has_one :team
     

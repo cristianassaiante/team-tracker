@@ -10,4 +10,33 @@ class ProfileController < ApplicationController
         end
         @team = Team.find_by(id: current_user.team_id)
     end
+
+        def update
+            if params[:user][:username].blank?
+                flash[:username_blank_error] = "Username cannot be blank"
+                redirect_to profile_path
+                return
+            end
+
+            @cose = User.find_by(username: params[:user][:username])
+            if !@cose.nil? && @cose.id != current_user.id
+                flash[:username_exist_error] = "Username already exists"
+                redirect_to profile_path
+                return
+            end
+
+            if !params[:user][:website].match('[a-z0-9.-]+\.[a-z]{2,}$')
+                flash[:website_error] = 'Wrong website format'
+                redirect_to profile_path
+                return
+            end
+
+
+            if params[:user][:school].blank?
+                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age]})
+            else
+                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age], school: params[:user][:school]})
+            end
+            redirect_to profile_path
+        end
 end

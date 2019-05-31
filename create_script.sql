@@ -5,6 +5,7 @@ drop table if exists users;
 drop table if exists teams;
 drop table if exists ctfs;
 drop domain if exists categ_domain;
+drop domain if exists school_level;
 
 CREATE DOMAIN categ_domain AS TEXT
 CHECK(
@@ -13,6 +14,15 @@ OR VALUE ~ 'Pwn'
 OR VALUE ~ 'Reverse'
 OR VALUE ~ 'Web'
 OR VALUE ~ 'Misc'
+);
+
+CREATE DOMAIN school_level AS TEXT
+CHECK(
+   VALUE ~ 'High School Diploma'
+OR VALUE ~ 'Undergraduated'
+OR VALUE ~ 'BSc'
+OR VALUE ~ 'Master'
+OR VALUE ~ 'PhD'
 );
 
 create table ctfs (id serial primary key, name varchar(40), onsite boolean, location varchar, unique(name));
@@ -32,7 +42,10 @@ create table users (
     unconfirmed_email varchar, 
     provider varchar, 
     uid varchar, 
-    team_id integer, 
+    team_id integer,
+    age integer,
+    website varchar,
+    school varchar,
     foreign key(team_id) references teams(id)
 );
 

@@ -28,7 +28,7 @@ def create
                .first_or_create(name: @chall_name, ctf_id: @ctf_id, points: @points, categ: @cat)
    
    @solve = Solve.new
-   @solve.is_pending = !current_user.is_admin || !Team.find_by(id: current_user).need_chal_confirmation
+   @solve.is_pending = !(current_user.is_admin || !Team.find_by(id: current_user.team_id).need_chal_confirmation)
    @solve.team_id = current_user.team_id
    @solve.user_id = current_user.id
    @solve.chal_id = @chal.id

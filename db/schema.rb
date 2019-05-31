@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_142804) do
+ActiveRecord::Schema.define(version: 2019_05_28_184553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 2019_05_27_142804) do
     t.string "provider"
     t.string "uid"
     t.integer "team_id"
+    t.integer "age"
+    t.string "website"
+    t.string "school"
   end
 
   add_foreign_key "chals", "ctfs", name: "chals_ctf_id_fkey"

@@ -96,4 +96,23 @@ class TeamHomeController < ApplicationController
         
         redirect_to team_home_path
     end
+
+    def update
+        if params[:team][:name].blank?
+            flash[:team_name_blank_error] = "Team name cannot be blank"
+            redirect_to team_edit_path
+            return
+        end
+
+        @cose = Team.find_by(name: params[:team][:name])
+        if !@cose.nil? && @cose.id != current_user.team_id
+            flash[:team_name_exist_error] = "Team name alredy exists"
+            redirect_to team_edit_path
+            return
+        end
+
+        @team = Team.find_by(id: current_user.team_id)
+        @team.update_attributes(name: params[:team][:name], need_chal_confirmation: params[:team][:need_chal_confirmation])
+        redirect_to team_edit_path
+    end
 end

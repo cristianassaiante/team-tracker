@@ -158,9 +158,40 @@
             </nav>
             
             <div class="content">
-                <h1>PROFILE</h1>
+              <h1>PROFILE</h1>
+              <%= form_for(:user, url: profile_edit_path, html: {method: :put} ) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
+                <div class="field">
+                  <%= f.label :username %><br>
+                  <%= f.text_field :username, autofocus: false, value:current_user.username, class: 'form-control' %>
+                  <% if flash[:username_blank_error] %>
+                    <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:username_blank_error] %></p>
+                  <% end %>
+                  <% if flash[:username_exist_error] %>
+                    <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:username_exist_error]%></p>
+                  <% end %>
+                </div>
+                <div class="field">
+                  <%= f.label 'Personal Website' %><br>
+                  <%= f.text_field :website, autofocus: false, value: current_user.website, class: 'form-control' %>
+                  <% if flash[:website_error] %>
+                    <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:website_error]%></p>
+                  <% end %>
+                </div>
+                <div class="field">
+                  <%= f.label 'Age' %><br>
+                  <%= f.text_field :age, autofocus: false, value: current_user.age, class: 'form-control' %>
+                </div>
+                <div>Current school level: <%= current_user.school %></div>
+                <div class="field">
+                  <%= f.select :school, options_for_select(["High School Diploma", "Bsc", "Undergradueted", "Master", "PhD"]), {:include_blank => '--- Select your school level ---', :id => 'school-lv'}, { class: 'form-control'} %>
+                </div>
+                <div class="actions">
+                  <%= f.submit "Update", class: 'btn btn-danger' %>
+                </div>
+              <% end %>
             </div>
-
+            </div>
         </div>
         
         <!-- /#wrapper -->
