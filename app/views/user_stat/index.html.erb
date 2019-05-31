@@ -93,24 +93,7 @@
         #wrapper.toggled #sidebar-wrapper {
         margin-left: 0;
         }
-        
-        table {
-                font-family: arial, sans-serif;
-                border-collapse: collapse;
-                width: 100%;
-        }
-
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-            color:#555;
-            font-size:110%;
-        }
-        th {
-            font-size: 150%;
-        }
-
+    
         @media (min-width: 768px) {
             #sidebar-wrapper {
                 margin-left: 0;
@@ -142,8 +125,8 @@
             <div class="border-right" id="sidebar-wrapper">
                 <div class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" class="sidebar-heading" href="/teamhome"><%= @team.name %></a></div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Team Stats</a>
+                <a href="/users/stat" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
+                <a href="/team/stat" class="list-group-item list-group-item-action bg-light">Team Stats</a>
                 <a href="/challenges" id="btn-sidebar" class="btn btn-danger btn-block">Add challenge</a>
                 <% if current_user.is_admin %>
                     <form action="/teamhome/newtoken" method="POST">
@@ -197,17 +180,22 @@
                         });
                 </script>
                 <br><br><br>
-                <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Points</th>
-                </tr>
-                <% @user_chal.each do |chal| %>
-                    <tr>
-                        <td><%= chal[:name] %></td>
-                        <td><%= chal[:points] %></td>
-                    </tr>
-                <% end %>
+                <h1>User challenges</h1>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @user_chal.each do |chal| %>
+                            <tr>
+                                <td><%= chal[:name] %></td>
+                                <td><%= chal[:points] %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
                 </table>
             </div>
                

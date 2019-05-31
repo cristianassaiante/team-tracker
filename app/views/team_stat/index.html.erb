@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title> Profile </title>
+        <title> Team Home </title>
 
         <style type="text/css">
         #header {
@@ -92,26 +93,27 @@
         #wrapper.toggled #sidebar-wrapper {
         margin-left: 0;
         }
+        
 
         @media (min-width: 768px) {
-        #sidebar-wrapper {
-            margin-left: 0;
-        }
+            #sidebar-wrapper {
+                margin-left: 0;
+            }
 
-        #page-content-wrapper {
-            min-width: 0;
-            width: 100%;
-        }
+            #page-content-wrapper {
+                min-width: 0;
+                width: 100%;
+            }
 
-        #wrapper.toggled #sidebar-wrapper {
-            margin-left: -15rem;
-        }
+            #wrapper.toggled #sidebar-wrapper {
+                margin-left: -15rem;
+            }
 
-        .navbar-brand {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+            .navbar-brand {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
         }
         </style>
 
@@ -133,7 +135,6 @@
                     </form>
                 <% end %>
                 <a href="/profile" id="btn-sidebar" class="btn btn-danger btn-block">Profile</a>
-                <a href="/settings" id="btn-sidebar" class="btn btn-danger btn-block">Settings</a>
             </div>
             </div>
             <!-- /#sidebar-wrapper -->
@@ -158,9 +159,47 @@
             </nav>
             
             <div class="content">
-                <h1>PROFILE</h1>
+                <canvas id="myChart" ></canvas>
+                <% @user_stat.each do |stat| %>
+                   <span style="display:none;" class="user_stat"><%= stat %></span>                 
+                <% end %>
+                <script>
+                    var ctx = document.getElementById('myChart').getContext('2d');
+                    var elems = document.getElementsByClassName("user_stat");
+                    var data = Array.prototype.slice.call(elems).map((x) => parseInt(x.innerHTML, 10));
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Reverse', 'Pwn', 'Misc', 'Crypto', 'Web'],
+                            datasets: [{
+                                label: 'Challenges statistics',
+                                data: data,
+                                backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF"]
+                            }]
+                        },
+                        options: {}
+                        });
+                </script>
+                <br><br><br>
+                <h1>Team challenges</h1>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Points</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% @user_chal.each do |chal| %>
+                            <tr>
+                                <td><%= chal[:name] %></td>
+                                <td><%= chal[:points] %></td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
             </div>
-
+               
         </div>
         
         <!-- /#wrapper -->
@@ -173,7 +212,6 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
         <!-- jQuery Custom Scroller CDN -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
-
         <!-- Menu Toggle Script -->
         <script>
             $("#menu-toggle").click(function(e) {
