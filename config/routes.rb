@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     post '/teamhome/notification', to: 'team_home#notifications'
     get  '/profile', to: 'profile#index'
     get  '/settings', to: 'settings#index'
-    
+    get  '/users/stat', to: 'user_stat#index'
     root :to => redirect('/home')
     
 end
