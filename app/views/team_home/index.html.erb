@@ -177,7 +177,7 @@
                                                 <% end %>
                                                 <% if current_user.is_admin && current_user.id != user.id%>
                                                     <input type="hidden" name="id_to_ban" value="<%= user.id %>"/>
-                                                    <button style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-danger">Ban</button>
+                                                    <button style="margin-bottom: 5%;" type="submit" class="btn btn-danger">Ban</button>
                                                 <% end %>
                                             </h4>
                                         </form>
@@ -188,21 +188,30 @@
                         <h2>Latest CTFs</h2>
                         <hr>
                         <div class="row">
-                            <ul style="list-style-type: none;">
-                                <% @ctfs.each do |ctf| %>
-                                    <li>
-                                        <h4>
-                                            <%= ctf.name %>
+                            <div class="col">
+                                <ul>
+                                    <% @ctfs.each do |ctf| %>
+                                        <li>
+                                            <h4><%= ctf.name %></h4>
                                             <% if ctf.onsite %>
-                                                <button style="margin-bottom: 5%;" id="btn-sidebar" class="btn btn-danger">View location</button>
+                                                <form action="/ctfs/maps" method="POST">    
+                                                    <input type="hidden" name="ctf_id" value="<%= ctf.id %>"/>
+                                                    <button type="submit" style="margin-bottom: 1%;" class="btn btn-danger">View location</button>
+                                                </form>
                                             <% end %>
-                                        </h4>
-                                    </li>
-                                <% end %>
-                            </ul>
+                                        </li>
+                                    <% end %>
+                                </ul>
+                            </div>
+                            <% if flash[:maps_path] %>
+                                <div class="col">
+                                    <iframe width="500" height="400" frameborder="0" src="<%= flash[:maps_path] %>" scrolling="no">
+                                    </iframe>
+                                </div>
+                            <% end %>
                         </div>
                     </div>
-                    <% if @challenges.length != 0 %>
+                    <% if @challenges && @challenges.length != 0 %>
                         <div class="col-4" style="border-left: 1px solid #DDD;">
                         <h1>Notifications</h1>
                             <% if current_user.is_admin %> 

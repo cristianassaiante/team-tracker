@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     get  '/profile', to: 'profile#index'
     get  '/settings', to: 'settings#index'
     get  '/users/stat', to: 'user_stat#index'
+    
+    post '/ctfs/maps', to: 'team_home#maps'
+    
     root :to => redirect('/home')
     
 end

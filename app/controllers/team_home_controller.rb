@@ -1,6 +1,7 @@
 class TeamHomeController < ApplicationController
     skip_before_action :verify_authenticity_token
     before_action :authenticate_user!
+    require 'open-uri'
     
     def index
         if !current_user.team_id
@@ -12,7 +13,6 @@ class TeamHomeController < ApplicationController
             @team_users = User.where(team_id: @team.id)
             @ctfs = Ctf.all.order("id desc").limit(5)
             
-            @challenges = []
             if current_user.is_admin
                 @challenges = ActiveRecord::Base.connection.execute("select chals.name as chal_name, chals.points as chal_points, ctfs.name as ctf_name, users.username as username, chals.id as chal_id from chals, solves,ctfs,users where solves.team_id = %d and solves.chal_id = chals.id and solves.is_pending = true and ctfs.id = chals.ctf_id and users.id = solves.user_id" % [@team.id]).as_json
             end
@@ -30,6 +30,18 @@ class TeamHomeController < ApplicationController
         else
            @solve.destroy
         end
+        redirect_to teamhome_path
+    end
+    
+    def maps
+        @ctf = Ctf.find_by(id: params[:ctf_id])
+        
+        @url = "https://dev.virtualearth.net/REST/v1/Locations?q=%s&key=%s" % [@ctf.location, Rails.application.secrets.bing_api_key]
+        @response = JSON.load(open(@url).read) 
+        @coordinates = @response["resourceSets"][0]["resources"][0]["point"]["coordinates"]
+        
+        @coordinates = "%s~%s" % [@coordinates[0], @coordinates[1]]
+        flash[:maps_path] = "https://www.bing.com/maps/embed?h=500&w=400&cp=%s&lvl=8&typ=d&sty=r&src=SHELL&FORM=MBEDV8" % [@coordinates]
         redirect_to teamhome_path
     end
     
@@ -63,14 +75,7 @@ class TeamHomeController < ApplicationController
         end
     end
     
-        def ban
-        @to_ban = params[:id_to_ban]
-        @user = User.find_by(id: @to_ban)
-        @user.update_attribute(:team_id, nil)
         
-        redirect_to teamhome_path
-    end
-    
     def join
         @plain_token = [params[:teamtoken]].pack("H*")
         @token = Digest::SHA256.hexdigest(@plain_token)
@@ -82,5 +87,13 @@ class TeamHomeController < ApplicationController
             flash[:join_error] = "Invalid token"
             redirect_to home_path 
         end
+    end
+    
+    def ban
+        @to_ban = params[:id_to_ban]
+        @user = User.find_by(id: @to_ban)
+        @user.update_attribute(:team_id, nil)
+        
+        redirect_to teamhome_path
     end
 end
