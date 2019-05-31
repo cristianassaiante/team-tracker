@@ -186,7 +186,7 @@
                         </select>
                         <br><br>
                         <label for="points">Points</label>
-                        <input name="points" type="text" class="form-control" id="points" placeholder="Points" required="required">
+                        <input name="points" type="number" class="form-control" id="points" placeholder="Points" required="required">
                       <% if flash[:blank_points_error]%>
                         <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:blank_points_error] %></p>
                       <% end %>

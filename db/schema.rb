@@ -73,8 +73,6 @@ ActiveRecord::Schema.define(version: 2019_05_28_184553) do
   end
 
   add_foreign_key "chals", "ctfs", name: "chals_ctf_id_fkey"
-  add_foreign_key "partecipates", "ctfs", name: "partecipates_ctf_id_fkey"
-  add_foreign_key "partecipates", "teams", name: "partecipates_team_id_fkey"
   add_foreign_key "solves", "chals", name: "solves_chal_id_fkey"
   add_foreign_key "solves", "teams", name: "solves_team_id_fkey"
   add_foreign_key "solves", "users", name: "solves_user_id_fkey"

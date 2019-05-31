@@ -1,8 +1,8 @@
+drop table if exists users cascade;
+drop table if exists teams cascade;
+drop table if exists ctfs cascade;
 drop table if exists solves;
 drop table if exists chals;
-drop table if exists users;
-drop table if exists teams;
-drop table if exists ctfs;
 drop domain if exists categ_domain;
 drop domain if exists school_level;
 

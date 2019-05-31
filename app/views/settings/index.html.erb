@@ -128,7 +128,7 @@
                 <a href="/team/stat" class="list-group-item list-group-item-action bg-light">Team Stats</a>
                 <a href="/challenges" id="btn-sidebar" class="btn btn-danger btn-block">Add challenge</a>
                 <% if current_user.is_admin %>
-                    <form action="/teamhome/newtoken" method="POST">
+                    <form action="/team/newtoken" method="POST">
                         <button id="btn-sidebar" type="submit" class="btn btn-danger btn-block">Get token</button>
                     </form>
                 <% end %>
