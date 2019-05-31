@@ -19,6 +19,24 @@ def index
 end
 
 def create
+
+   if params[:points].blank?
+      flash[:blank_points_error] = "Points cannot be blank"
+      redirect_to challenges_path
+      return
+   end
+
+   if params[:chall_name].blank?
+      flash[:blank_chall_name_error] = "Challege name cannot be blank"
+      redirect_to challenges_path
+      return
+   end
+
+   if !params[:points].is_a? Integer
+      flash[:not_int_points_error] = "Points must be integer"
+      redirect_to challenges_path
+      return
+   end
    @ctfname = params[:ctf_name]
    @points = params[:points].to_i
    @cat = params[:category]

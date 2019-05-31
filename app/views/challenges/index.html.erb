@@ -172,6 +172,9 @@
                         <br><br><br>
                         <label for="chall_name">Challenge</label>
                         <input name="chall_name" type="text" class="form-control" id="chall_name" placeholder="Enter chall name" required="required">
+                      <% if flash[:blank_chall_name_error]%>
+                        <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:blank_chall_name_error] %></p>
+                        <% end %>
                         <br><br>
                         <label for="category">Category</label><br>
                         <select name="category">
@@ -184,12 +187,18 @@
                         <br><br>
                         <label for="points">Points</label>
                         <input name="points" type="text" class="form-control" id="points" placeholder="Points" required="required">
+                      <% if flash[:blank_points_error]%>
+                        <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:blank_points_error] %></p>
+                      <% end %>
+                      <% if flash[:not_int_points_error]%>
+                        <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:not_int_points_error] %></p>
+                      <% end %>
                         <br><br>
                         <button type="submit" class="btn btn-danger btn-block">Submit</button> 
                     </form>
                 </div>
             </div>
-
+            </div>
         </div>
         
         <!-- /#wrapper -->
