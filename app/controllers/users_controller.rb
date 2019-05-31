@@ -1,13 +1,6 @@
 class UsersController < Devise::RegistrationsController
     before_action :authenticate_user!, :except => [:create]
     
-    def ban
-        @to_ban = params[:id_to_ban]
-        @user = User.find_by(id: @to_ban)
-        @user.update_attribute(:team_id, nil)
-        
-        redirect_to teamhome_path
-    end
     
     def create
         @user_params = params[:user]

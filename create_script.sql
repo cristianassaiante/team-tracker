@@ -47,6 +47,7 @@ create table chals (
 );
 
 create table solves (
+  id serial primary key,
   user_id integer,
   chal_id integer,
   team_id integer,

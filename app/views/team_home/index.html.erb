@@ -202,16 +202,18 @@
                             </ul>
                         </div>
                     </div>
+                    <% if @challenges %>
                     <div class="col-4" style="border-left: 1px solid #DDD;">
-                    <h1>uaisd</h1>
+                    <h1>Notifications</h1>
                         <% if current_user.is_admin %> 
                             <ul style="list-style-type: none;">
                                 <% @challenges.each do |chal| %>
                                     <li>
                                         <form action="/teamhome/notification" method="POST">
                                             <h4>
-                                                <%= chal.chal_name %>
-                                                <p><%= chal.chal_points %>, <%= chal.ctf_name %>, <%= chal.username %></p>
+                                                <%= chal["chal_name"] %>
+                                                <p><%= chal["chal_points"] %>, <%= chal["ctf_name"] %>, <%= chal["username"] %></p>
+                                                <input type="hidden" name="chal_id" value="<%= chal["chal_id"] %>"/>
                                                 <button name="accept" style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-success">Accept</button>
                                                 <button name="decline" style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-danger">Decline</button>
                                             </h4>
@@ -221,6 +223,7 @@
                             </ul>
                         <% end %>
                     </div>
+                    <% end %>
                 </div>
             </div>
 

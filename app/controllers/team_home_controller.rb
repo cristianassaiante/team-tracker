@@ -9,20 +9,34 @@ class TeamHomeController < ApplicationController
             redirect_to home_path
         else
             @team = Team.find_by(id: current_user.team_id)
-            
             @team_users = User.where(team_id: @team.id)
             @solves = Solve.where(team_id: @team.id)
-            
             @ctfs = []
-            for idx in 0..(@solves.length-1 % 5)
-                p @solves[idx]
+            for idx in 0..@solves.length-1
                 @chal = Chal.find_by(id: @solves[idx].chal_id)
                 @ctf = Ctf.find_by(id: @chal.ctf_id)
                 if !@ctfs.include? @ctf
                     @ctfs.push(@ctf)
                 end
             end
+            if current_user.is_admin
+                @challenges = ActiveRecord::Base.connection.execute("select chals.name as chal_name, chals.points as chal_points, ctfs.name as ctf_name, users.username as username, chals.id as chal_id from chals, solves,ctfs,users where solves.team_id = %d and solves.chal_id = chals.id and solves.is_pending = true and ctfs.id = chals.ctf_id and users.id = solves.user_id" % [@team.id]).as_json
+            end
         end
+    end
+    
+    def notifications
+        @chal_id = params[:chal_id]
+        @action = params[:accept] != nil
+        @solve = Solve.where(chal_id: @chal_id, team_id: current_user.team_id)
+        p @solve
+        @solve = @solve[0]
+        if @action
+           @solve.update_attribute(:is_pending, false)
+        else
+           @solve.destroy
+        end
+        redirect_to teamhome_path
     end
     
     def create
@@ -53,6 +67,14 @@ class TeamHomeController < ApplicationController
         else
            flash[:token_i] = "Unauthorized" 
         end
+    end
+    
+        def ban
+        @to_ban = params[:id_to_ban]
+        @user = User.find_by(id: @to_ban)
+        @user.update_attribute(:team_id, nil)
+        
+        redirect_to teamhome_path
     end
     
     def join

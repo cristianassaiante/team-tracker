@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_28_184553) do
+ActiveRecord::Schema.define(version: 2019_05_27_142804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_184553) do
     t.index ["team_id", "ctf_id"], name: "partecipates_team_id_ctf_id_key", unique: true
   end
 
-  create_table "solves", id: false, force: :cascade do |t|
+  create_table "solves", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "chal_id"
     t.integer "team_id"
