@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_142804) do
+ActiveRecord::Schema.define(version: 2019_05_28_184553) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 2019_05_27_142804) do
   create_table "teams", id: :serial, force: :cascade do |t|
     t.string "name", limit: 40
     t.string "token", limit: 64
+    t.boolean "need_chal_confirmation", default: true
     t.index ["name"], name: "teams_name_key", unique: true
   end
 

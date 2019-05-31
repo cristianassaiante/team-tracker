@@ -10,15 +10,9 @@ class TeamHomeController < ApplicationController
         else
             @team = Team.find_by(id: current_user.team_id)
             @team_users = User.where(team_id: @team.id)
-            @solves = Solve.where(team_id: @team.id)
-            @ctfs = []
-            for idx in 0..@solves.length-1
-                @chal = Chal.find_by(id: @solves[idx].chal_id)
-                @ctf = Ctf.find_by(id: @chal.ctf_id)
-                if !@ctfs.include? @ctf
-                    @ctfs.push(@ctf)
-                end
-            end
+            @ctfs = Ctf.all.order("id desc").limit(5)
+            
+            @challenges = []
             if current_user.is_admin
                 @challenges = ActiveRecord::Base.connection.execute("select chals.name as chal_name, chals.points as chal_points, ctfs.name as ctf_name, users.username as username, chals.id as chal_id from chals, solves,ctfs,users where solves.team_id = %d and solves.chal_id = chals.id and solves.is_pending = true and ctfs.id = chals.ctf_id and users.id = solves.user_id" % [@team.id]).as_json
             end

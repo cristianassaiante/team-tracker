@@ -16,7 +16,7 @@ OR VALUE ~ 'Misc'
 );
 
 create table ctfs (id serial primary key, name varchar(40), onsite boolean, location varchar, unique(name));
-create table teams (id serial primary key, name varchar(40), token varchar(64), unique(name));
+create table teams (id serial primary key, name varchar(40), token varchar(64), need_chal_confirmation boolean default true, unique(name));
 create table users (
     id serial primary key, 
     username varchar not null default '', 

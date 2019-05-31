@@ -10,9 +10,9 @@ def index
    @x = []
    @len = @response.length
    for offset in 0..@len-1
-       @x.push(@response[@len - 1 - offset]['title'])
-       Ctf.where(name: @response[@len - 1 - offset]['title'])
-               .first_or_create(name: @response[@len - 1 - offset]['title'], onsite: @response[@len - 1 - offset]['onsite'], location: @response[@len - 1 - offset]['location'])
+       @x.push(@response[offset]['title'])
+       Ctf.where(name: @response[offset]['title'])
+               .first_or_create(name: @response[offset]['title'], onsite: @response[offset]['onsite'], location: @response[offset]['location'])
    end
    @ctfs = @x
    @team = Team.find_by(id: current_user.team_id)
@@ -28,7 +28,7 @@ def create
                .first_or_create(name: @chall_name, ctf_id: @ctf_id, points: @points, categ: @cat)
    
    @solve = Solve.new
-   @solve.is_pending = ! current_user.is_admin
+   @solve.is_pending = !current_user.is_admin || !Team.find_by(id: current_user).need_chal_confirmation
    @solve.team_id = current_user.team_id
    @solve.user_id = current_user.id
    @solve.chal_id = @chal.id
