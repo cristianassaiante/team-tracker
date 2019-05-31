@@ -1,4 +1,3 @@
-drop table if exists partecipates;
 drop table if exists solves;
 drop table if exists chals;
 drop table if exists users;
@@ -70,12 +69,4 @@ create table solves (
   foreign key(user_id) references users(id),
   foreign key(chal_id) references chals(id),
   foreign key(team_id) references teams(id)
-);
-
-create table partecipates (
-  team_id integer,
-  ctf_id integer,
-  unique(team_id, ctf_id),
-  foreign key(team_id) references teams(id),
-  foreign key(ctf_id) references ctfs(id)
 );

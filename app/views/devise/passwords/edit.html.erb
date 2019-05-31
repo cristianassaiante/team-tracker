@@ -1,25 +1,68 @@
-<h2>Change your password</h2>
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+        <title> Log In </title>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+        <style type="text/css">
+            .center-block {
+                position: relative;
+                left: 30%;
+                background-color: #E55;
+                padding: 5%;
+                border-radius: 20px;
+                width: 40%;
+            }
+            
+            #title {
+                text-align: center;
+                text-transform: uppercase;
+                font-family: "Lucida Console", Monaco, monospace;
+            }
+            
+            #blank-space {
+                padding: 5%;
+            }
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+        </style>
 
-<%= render "devise/shared/links" %>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row-1" id="blank-space"><br></div>
+            <div class="row-1" id="title">
+                <a href="/home" style="color:#222; text-decoration: none;"><h1><b>Team Tracker<b></h1></a>
+            </div>
+            <div class="row-2">
+                <div class="center-block">
+                    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                        <%= render "devise/shared/error_messages", resource: resource %>
+                        <%= f.hidden_field :reset_password_token %>
+
+                        <div class="field">
+                            <%= f.label :password, "New password" %><br />
+                            <% if @minimum_password_length %>
+                            <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                            <% end %>
+                            <%= f.password_field :password, autofocus: true, autocomplete: "new-password", :class => "form-control" %>
+                        </div>
+
+                        <div class="field">
+                            <%= f.label :password_confirmation, "Confirm new password" %><br />
+                            <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control"%>
+                        </div>
+
+                        <div class="actions">
+                            <%= f.submit "Change my password", :class => "btn btn-danger btn-block"%>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
