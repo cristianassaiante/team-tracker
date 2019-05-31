@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"  crossorigin="anonymous"></script>
 
         <title> Team Home </title>
 
@@ -163,23 +163,6 @@
                 <% @user_stat.each do |stat| %>
                    <span style="display:none;" class="user_stat"><%= stat %></span>                 
                 <% end %>
-                <script>
-                    var ctx = document.getElementById('myChart').getContext('2d');
-                    var elems = document.getElementsByClassName("user_stat");
-                    var data = Array.prototype.slice.call(elems).map((x) => parseInt(x.innerHTML, 10));
-                    var chart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Reverse', 'Pwn', 'Misc', 'Crypto', 'Web'],
-                            datasets: [{
-                                label: 'Challenges statistics',
-                                data: data,
-                                backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF"]
-                            }]
-                        },
-                        options: {}
-                        });
-                </script>
                 <br><br><br>
                 <h1>Team challenges</h1>
                 <table class="table table-hover">
@@ -222,6 +205,23 @@
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
             });
+        </script>
+        <script>
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var elems = document.getElementsByClassName("user_stat");
+            var data = Array.prototype.slice.call(elems).map((x) => parseInt(x.innerHTML, 10));
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Reverse', 'Pwn', 'Misc', 'Crypto', 'Web'],
+                    datasets: [{
+                        label: 'Challenges statistics',
+                        data: data,
+                        backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF"]
+                    }]
+                },
+                options: {}
+                });
         </script>
     </body>
 </html>
