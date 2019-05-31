@@ -34,7 +34,7 @@ def create
    @solve.chal_id = @chal.id
    @solve.save
    
-   redirect_to teamhome_path
+   redirect_to team_home_path
 end
     
 

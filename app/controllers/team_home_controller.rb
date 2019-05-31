@@ -30,7 +30,7 @@ class TeamHomeController < ApplicationController
         else
            @solve.destroy
         end
-        redirect_to teamhome_path
+        redirect_to team_home_path
     end
     
     def maps
@@ -42,7 +42,7 @@ class TeamHomeController < ApplicationController
         
         @coordinates = "%s~%s" % [@coordinates[0], @coordinates[1]]
         flash[:maps_path] = "https://www.bing.com/maps/embed?h=500&w=400&cp=%s&lvl=8&typ=d&sty=r&src=SHELL&FORM=MBEDV8" % [@coordinates]
-        redirect_to teamhome_path
+        redirect_to team_home_path
     end
     
     def create
@@ -57,7 +57,7 @@ class TeamHomeController < ApplicationController
             current_user.update_attribute(:team_id, @team.id)
             current_user.update_attribute(:is_admin, true)
             
-            redirect_to teamhome_path
+            redirect_to team_home_path
         end
     end
     
@@ -69,7 +69,7 @@ class TeamHomeController < ApplicationController
            
            @team.update_attribute(:token, @hashed_token)
            flash[:token_info] = @token.unpack("H*")[0]
-           redirect_to teamhome_path
+           redirect_to team_home_path
         else
            flash[:token_i] = "Unauthorized" 
         end
@@ -82,7 +82,7 @@ class TeamHomeController < ApplicationController
         @team = Team.find_by(token: @token)
         if @team
             current_user.update_attribute(:team_id, @team.id)
-            redirect_to teamhome_path
+            redirect_to team_home_path
         else
             flash[:join_error] = "Invalid token"
             redirect_to home_path 
@@ -94,6 +94,6 @@ class TeamHomeController < ApplicationController
         @user = User.find_by(id: @to_ban)
         @user.update_attribute(:team_id, nil)
         
-        redirect_to teamhome_path
+        redirect_to team_home_path
     end
 end

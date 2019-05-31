@@ -124,16 +124,16 @@
             <div class="border-right" id="sidebar-wrapper">
                 <div class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" class="sidebar-heading" href="/teamhome"><%= @team.name %></a></div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Team Stats</a>
+                <a href="/users/stat" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
+                <a href="/team/stat" class="list-group-item list-group-item-action bg-light">Team Stats</a>
                 <a href="/challenges" id="btn-sidebar" class="btn btn-danger btn-block">Add challenge</a>
                 <% if current_user.is_admin %>
                     <form action="/teamhome/newtoken" method="POST">
                         <button id="btn-sidebar" type="submit" class="btn btn-danger btn-block">Get token</button>
                     </form>
                 <% end %>
-                <a href="/profile" id="btn-sidebar" class="btn btn-danger btn-block">Profile</a>
-                <a href="/settings" id="btn-sidebar" class="btn btn-danger btn-block">Settings</a>
+                <a href="/users/profile" id="btn-sidebar" class="btn btn-danger btn-block">Profile</a>
+                <a href="/users/settings" id="btn-sidebar" class="btn btn-danger btn-block">Settings</a>
             </div>
             </div>
             <!-- /#sidebar-wrapper -->

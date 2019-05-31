@@ -3,24 +3,26 @@ Rails.application.routes.draw do
     devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: 'users', sessions: 'login', confirmations: 'confirmation' }
     
     
-    get  '/home', to: 'home#index'
     
-    get  '/teamhome', to: 'team_home#index'
-    post '/teamhome/create', to: 'team_home#create'
-    post '/teamhome/join', to: 'team_home#join'
-    post '/teamhome/newtoken', to: 'team_home#new_token'
+    get  '/team/home', to: 'team_home#index'
+    post '/team/create', to: 'team_home#create'
+    post '/team/join', to: 'team_home#join'
+    post '/team/newtoken', to: 'team_home#new_token'
+    get  '/team/stat', to: 'team_stat#index'
+    post '/team/notification', to: 'team_home#notifications'
     
     get  '/login', to: 'login#index'
+    
+    get  '/home', to: 'home#index'
     
     get  '/challenges', to: 'challenges#index'
     post '/challenges/create', to: 'challenges#create'
     
-    post '/users/ban', to: 'team_home#ban'
-    post '/teamhome/notification', to: 'team_home#notifications'
-    get  '/profile', to: 'profile#index'
-    get  '/settings', to: 'settings#index'
     get  '/users/stat', to: 'user_stat#index'
-    get  '/team/stat', to: 'team_stat#index'
+    post '/users/ban', to: 'team_home#ban'
+    get  '/users/profile', to: 'profile#index'
+    get  '/users/settings', to: 'settings#index'
+    
     post '/ctfs/maps', to: 'team_home#maps'
     
     root :to => redirect('/home')

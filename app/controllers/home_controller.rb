@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     
     def index
         if current_user.present? && current_user.team_id
-            redirect_to teamhome_path
+            redirect_to team_home_path
         else
             @tweets = []
             @tweets += $twitter_client.search("#ctf", result_type: "recent", lang: "en").first(2)

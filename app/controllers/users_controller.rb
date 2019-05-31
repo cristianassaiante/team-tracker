@@ -17,7 +17,7 @@ class UsersController < Devise::RegistrationsController
         
         if !@user.valid? || params[:user][:password] != params[:user][:password_confirmation]
 
-            flash[:password_error] = "Password must contain at least one number, one uppercase and lowercase letter, at least 8 or more characters and must match with password confirmation\n"+ @user.errors.messages.to_s
+            flash[:password_error] = "Password must contain at least one number, one uppercase and lowercase letter, at least 8 or more characters and must match with password confirmation\n"
             redirect_to home_path
             return
         else
