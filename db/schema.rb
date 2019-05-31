@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_184553) do
     t.integer "age"
     t.string "website"
     t.string "school"
+    t.string "nationality"
   end
 
   add_foreign_key "chals", "ctfs", name: "chals_ctf_id_fkey"

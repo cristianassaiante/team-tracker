@@ -25,7 +25,7 @@ class ProfileController < ApplicationController
                 return
             end
 
-            if !params[:user][:website].match('[a-z0-9.-]+\.[a-z]{2,}$')
+            if !params[:user][:website].blank? && !params[:user][:website].match('[a-z0-9.-]+\.[a-z]{2,}$')
                 flash[:website_error] = 'Wrong website format'
                 redirect_to users_profile_path
                 return
@@ -33,9 +33,9 @@ class ProfileController < ApplicationController
 
 
             if params[:user][:school].blank?
-                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age]})
+                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age], nationality: params[:user][:nationality]})
             else
-                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age], school: params[:user][:school]})
+                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age], school: params[:user][:school], nationality: params[:user][:nationality]})
             end
             redirect_to users_profile_path
         end

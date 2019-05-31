@@ -46,6 +46,7 @@ create table users (
     age integer,
     website varchar,
     school varchar,
+    nationality varchar,
     foreign key(team_id) references teams(id)
 );
 
