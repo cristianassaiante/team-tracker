@@ -161,43 +161,66 @@
                     <p class="notice" style="color:#E55;font-size:110%;">Your team token is: <%= flash[:token_info] %></p>
                 <% end %>
                 
-                <h2>Users</h2>
-                <hr>
                 <div class="row">
-                    <ul style="list-style-type: none;">
-                        <% @team_users.each do |user| %>
-                            <li>
-                                <form action="/users/ban" method="POST">
-                                    <h4>
-                                        <%= user.username %>
-                                        <% if user.is_admin %>
-                                            <p> admin </p>
-                                        <% end %>
-                                        <% if current_user.is_admin && current_user.id != user.id%>
-                                            <input type="hidden" name="id_to_ban" value="<%= user.id %>"/>
-                                            <button style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-danger">Ban</button>
-                                        <% end %>
-                                    </h4>
-                                </form>
-                            </li>
+                    <div class="col">
+                        <h2>Users</h2>
+                        <hr>
+                        <div class="row">
+                            <ul style="list-style-type: none;">
+                                <% @team_users.each do |user| %>
+                                    <li>
+                                        <form action="/users/ban" method="POST">
+                                            <h4>
+                                                <%= user.username %>
+                                                <% if user.is_admin %>
+                                                    <p> admin </p>
+                                                <% end %>
+                                                <% if current_user.is_admin && current_user.id != user.id%>
+                                                    <input type="hidden" name="id_to_ban" value="<%= user.id %>"/>
+                                                    <button style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-danger">Ban</button>
+                                                <% end %>
+                                            </h4>
+                                        </form>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                        <h2>Latest CTFs</h2>
+                        <hr>
+                        <div class="row">
+                            <ul style="list-style-type: none;">
+                                <% @ctfs.each do |ctf| %>
+                                    <li>
+                                        <h4>
+                                            <%= ctf.name %>
+                                            <% if ctf.onsite %>
+                                                <button style="margin-bottom: 5%;" id="btn-sidebar" class="btn btn-danger">View location</button>
+                                            <% end %>
+                                        </h4>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-4" style="border-left: 1px solid #DDD;">
+                    <h1>uaisd</h1>
+                        <% if current_user.is_admin %> 
+                            <ul style="list-style-type: none;">
+                                <% @challenges.each do |chal| %>
+                                    <li>
+                                        <form action="/teamhome/notification" method="POST">
+                                            <h4>
+                                                <%= chal.chal_name %>
+                                                <p><%= chal.chal_points %>, <%= chal.ctf_name %>, <%= chal.username %></p>
+                                                <button name="accept" style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-success">Accept</button>
+                                                <button name="decline" style="margin-bottom: 5%;" id="btn-sidebar" type="submit" class="btn btn-danger">Decline</button>
+                                            </h4>
+                                        </form>
+                                    </li>
+                                <% end %>
+                            </ul>
                         <% end %>
-                    </ul>
-                </div>
-                <h2>Latest CTFs</h2>
-                <hr>
-                <div class="row">
-                    <ul style="list-style-type: none;">
-                        <% @ctfs.each do |ctf| %>
-                            <li>
-                                <h4>
-                                    <%= ctf.name %>
-                                    <% if ctf.onsite %>
-                                        <button style="margin-bottom: 5%;" id="btn-sidebar" class="btn btn-danger">View location</button>
-                                    <% end %>
-                                </h4>
-                            </li>
-                        <% end %>
-                    </ul>
+                    </div>
                 </div>
             </div>
 
