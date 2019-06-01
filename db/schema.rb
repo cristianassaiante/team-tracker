@@ -95,8 +95,6 @@ ActiveRecord::Schema.define(version: 2019_06_01_095942) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "chals", "ctfs", name: "chals_ctf_id_fkey"
-  add_foreign_key "partecipates", "ctfs", name: "partecipates_ctf_id_fkey"
-  add_foreign_key "partecipates", "teams", name: "partecipates_team_id_fkey"
   add_foreign_key "solves", "chals", name: "solves_chal_id_fkey"
   add_foreign_key "solves", "teams", name: "solves_team_id_fkey"
   add_foreign_key "solves", "users", name: "solves_user_id_fkey"
