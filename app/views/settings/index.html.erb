@@ -164,7 +164,7 @@
                   <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
                     <div class="field">
-                      <%= f.label :email %><br />
+                      <b><%= f.label :email %></b><br />
                       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', value: current_user.email%>
                       <% if flash[:email_blank_error] %>
                       <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:email_blank_error] %></p>
@@ -176,7 +176,7 @@
                     <% end %>
 
                     <div class="field">
-                      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+                      <b><%= f.label :password %></b><i>(leave blank if you don't want to change it)</i><br />
                       <%= f.password_field :password, autocomplete: "new-password", class: 'form-control'%>
                       <% if flash[:password_length_error] %>
                         <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:password_length_error] %></p>
@@ -187,7 +187,7 @@
                     </div>
 
                     <div class="field">
-                      <%= f.label :password_confirmation %><br />
+                      <b><%= f.label :password_confirmation %></b><br />
                       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
                       <% if flash[:password_match_error] %>
                         <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:password_match_error] %></p>
@@ -195,7 +195,7 @@
                     </div>
 
                     <div class="field">
-                      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+                      <b><%= f.label :current_password %></b>  <i>(we need your current password to confirm your changes)</i><br />
                       <%= f.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
                       <% if flash[:current_password_error] %>
                         <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:current_password_error] %></p>
@@ -217,7 +217,7 @@
                   <div class="team_settings">
                     <%= form_for(:team, url: '/team/edit', html: { method: :put }) do |t| %>
                       <div class="field">
-                        <%= t.label 'Team name' %><br>
+                        <b><%= t.label 'Team name' %></b><br>
                         <%= t.text_field :name, autofocus: false, class: 'form-control' %>
                         <% if flash[:team_name_blank_error] %>
                           <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:team_name_blank_error] %></p>
@@ -228,7 +228,7 @@
                       </div>
                       <div class="check_box">
                         <%= t.check_box :need_chal_confirmation %>
-                        <%= t.label 'Submission policy (check if you want notification by teammates challenges submission)   ' %><br>
+                        <b><%= t.label 'Submission policy' %></b> (check if you want notification by teammates challenges submission)<br>
                         <span class="checkmark"></span>
                       </div>
                       <div class="actions">

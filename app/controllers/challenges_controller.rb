@@ -21,27 +21,22 @@ end
 def create
 
     if params[:points].blank?
-        p "MERDA"
         flash[:blank_points_error] = "Points cannot be blank"
         redirect_to challenges_path
         return
     end
 
     if params[:chall_name].blank?
-        p "FIGA"
         flash[:blank_chall_name_error] = "Challege name cannot be blank"
         redirect_to challenges_path
         return
     end
 
     if !params[:points].match("[0-9]+")
-        p "BUBU"
         flash[:not_int_points_error] = "Points must be integer"
         redirect_to challenges_path
         return
     end
-    
-    p "CAZZO"
     
     @ctfname = params[:ctf_name]
     @points = params[:points].to_i

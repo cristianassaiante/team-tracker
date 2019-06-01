@@ -49,7 +49,7 @@ class User < ApplicationRecord
               on: :update
     
     has_one :team
-    
+    has_one_attached :avatar
     has_many :chal, through: :solves
     has_many :solves
 end

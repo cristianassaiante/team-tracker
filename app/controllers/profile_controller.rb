@@ -32,11 +32,18 @@ class ProfileController < ApplicationController
             end
 
 
-            if params[:user][:school].blank?
-                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age], nationality: params[:user][:nationality]})
-            else
-                current_user.update_without_password({username: params[:user][:username], website: params[:user][:website], age: params[:user][:age], school: params[:user][:school], nationality: params[:user][:nationality]})
+            @pars = {username: params[:user][:username], website: params[:user][:website], age: params[:user][:age], nationality: params[:user][:nationality]}
+
+            if !params[:user][:school].blank?
+                @pars[:school] = params[:user][:school]
             end
+
+            if !params[:user][:avatar].blank?
+                @pars[:avatar] = params[:user][:avatar]
+            end
+
+            current_user.update_without_password(@pars)
+
             redirect_to users_profile_path
         end
 end
