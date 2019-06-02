@@ -1,230 +1,230 @@
 <!doctype html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title> Profile </title>
+  <title> Profile </title>
 
-        <style type="text/css">
-        #header {
-            background-color: #E55;
-            text-transform: uppercase;
-        }
+  <style type="text/css">
+    #header {
+      background-color: #E55;
+      text-transform: uppercase;
+    }
 
-        .navbar-brand {
-            font-family: "Lucida Console", Monaco, monospace;
-            left: 10%;
-        }
+    .navbar-brand {
+      font-family: "Lucida Console", Monaco, monospace;
+      left: 10%;
+    }
 
-        .navbar-brand a {
-            color: #000;
-        }
+    .navbar-brand a {
+      color: #000;
+    }
 
-        .navbar-brand a:hover {
-            color: #444;
-            text-decoration: none;
-        }
+    .navbar-brand a:hover {
+      color: #444;
+      text-decoration: none;
+    }
 
-        .content {
-            padding: 5%;
-        }
+    .content {
+      padding: 5%;
+    }
 
-        /* Added Style*/
-        body {
-        overflow-x: hidden;
-        }
+    /* Added Style*/
+    body {
+      overflow-x: hidden;
+    }
 
-        .border-right {
-        background-color: #555 !important;
-        border-right-color: #555 !important;
-        }
+    .border-right {
+      background-color: #555 !important;
+      border-right-color: #555 !important;
+    }
 
-        .list-group-item {
-        background-color: #555 !important;
-        color: #fff !important;
-        }
+    .list-group-item {
+      background-color: #555 !important;
+      color: #fff !important;
+    }
 
-        .list-group-item:hover {
-        lighting-color: #E55 !important;
-        color: black !important;
-        }
+    .list-group-item:hover {
+      lighting-color: #E55 !important;
+      color: black !important;
+    }
 
-        .list-group-item-action:focus{
-        color: black !important;
-        }
+    .list-group-item-action:focus{
+      color: black !important;
+    }
 
-        .sidebar-heading {
-        color: #E55 !important;
-        }
+    .sidebar-heading {
+      color: #E55 !important;
+    }
 
-        #btn-sidebar {
-        margin-top: 5%;
-        color: white;
-        }
-        
+    #btn-sidebar {
+      margin-top: 5%;
+      color: white;
+    }
 
-        #sidebar-wrapper {
-        
-        min-height: 100vh;
-        margin-left: -15rem;
-        -webkit-transition: margin .25s ease-out;
-        -moz-transition: margin .25s ease-out;
-        -o-transition: margin .25s ease-out;
-        transition: margin .25s ease-out;
-        }
 
-        #sidebar-wrapper .sidebar-heading {
-        padding: 0.875rem 1.25rem;
-        font-size: 1.2rem;
-        }
+    #sidebar-wrapper {
 
-        #sidebar-wrapper .list-group {
-        width: 15rem;
-        }
+      min-height: 100vh;
+      margin-left: -15rem;
+      -webkit-transition: margin .25s ease-out;
+      -moz-transition: margin .25s ease-out;
+      -o-transition: margin .25s ease-out;
+      transition: margin .25s ease-out;
+    }
 
-        #page-content-wrapper {
-        min-width: 100vw;
-        }
+    #sidebar-wrapper .sidebar-heading {
+      padding: 0.875rem 1.25rem;
+      font-size: 1.2rem;
+    }
 
-        #wrapper.toggled #sidebar-wrapper {
+    #sidebar-wrapper .list-group {
+      width: 15rem;
+    }
+
+    #page-content-wrapper {
+      min-width: 100vw;
+    }
+
+    #wrapper.toggled #sidebar-wrapper {
+      margin-left: 0;
+    }
+
+    @media (min-width: 768px) {
+      #sidebar-wrapper {
         margin-left: 0;
-        }
+      }
 
-        @media (min-width: 768px) {
-        #sidebar-wrapper {
-            margin-left: 0;
-        }
+      #page-content-wrapper {
+        min-width: 0;
+        width: 100%;
+      }
 
-        #page-content-wrapper {
-            min-width: 0;
-            width: 100%;
-        }
+      #wrapper.toggled #sidebar-wrapper {
+        margin-left: -15rem;
+      }
 
-        #wrapper.toggled #sidebar-wrapper {
-            margin-left: -15rem;
-        }
+      .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
 
-        .navbar-brand {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        }
-        </style>
+</head>
+<body>
 
-    </head>
-    <body>
-    
-        <div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper">
 
-            <!-- Sidebar -->
-            <div class="border-right" id="sidebar-wrapper">
-                <div class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" class="sidebar-heading" href="/team/home"><%= @team.name %></a></div>
-            <div class="list-group list-group-flush">
-                <a href="/users/stat" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
-                <a href="/team/stat" class="list-group-item list-group-item-action bg-light">Team Stats</a>
-                <a href="/challenges" id="btn-sidebar" class="btn btn-danger btn-block">Add challenge</a>
-                <% if current_user.is_admin %>
-                    <form action="/team/newtoken" method="POST">
-                        <button id="btn-sidebar" type="submit" class="btn btn-danger btn-block">Get token</button>
-                    </form>
-                <% end %>
-                <a href="/users/profile" id="btn-sidebar" class="btn btn-danger btn-block">Profile</a>
-                <a href="/users/settings" id="btn-sidebar" class="btn btn-danger btn-block">Settings</a>
-            </div>
-            </div>
-            <!-- /#sidebar-wrapper -->
+  <!-- Sidebar -->
+  <div class="border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading"><a style="background-color: #555; color: white; text-decoration: none;" class="sidebar-heading" href="/team/home"><%= @team.name %></a></div>
+    <div class="list-group list-group-flush">
+      <a href="/users/stat" class="list-group-item list-group-item-action bg-light">Personal Stats</a>
+      <a href="/team/stat" class="list-group-item list-group-item-action bg-light">Team Stats</a>
+      <a href="/challenges" id="btn-sidebar" class="btn btn-danger btn-block">Add challenge</a>
+      <% if current_user.is_admin %>
+        <form action="/team/newtoken" method="POST">
+          <button id="btn-sidebar" type="submit" class="btn btn-danger btn-block">Get token</button>
+        </form>
+      <% end %>
+      <a href="/users/profile" id="btn-sidebar" class="btn btn-danger btn-block">Profile</a>
+      <a href="/users/settings" id="btn-sidebar" class="btn btn-danger btn-block">Settings</a>
+    </div>
+  </div>
+  <!-- /#sidebar-wrapper -->
 
-            <!-- Page Content -->
-            <div id="page-content-wrapper">
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
 
-            <nav id="header" class="navbar navbar-expand-lg navbar-light border-bottom">
-                <button class="btn btn-danger" id="menu-toggle">Menu</button>
+    <nav id="header" class="navbar navbar-expand-lg navbar-light border-bottom">
+      <button class="btn btn-danger" id="menu-toggle">Menu</button>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <a style="background-color: #E55;" class="navbar-brand mb-0 h1" href="#"><%= current_user.username %></a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger", :style => "color: white;") %>
-                    </li>
-                </ul>
-                </div>
-            </nav>
-            
-            <div class="content">
-              <h1>PROFILE</h1>
-              <%= form_for(:user, url: profile_edit_path, html: {method: :put} ) do |f| %>
-                <div name = "avatar">
-                  <% if current_user.avatar.attached? %>
-                    <%= image_tag current_user.avatar.variant(resize: "200x200!"), class: "rounded" %>
-                  <% else %>
-                    <%= image_tag 'https://agrimachinery.nic.in/Images/User/User.png', width: "200", height: "200" %>
-                  <% end %>
-                </div>
-                <hr>
-                <div name = "avatar_field">
-                  <%= f.file_field :avatar%>
-                </div>
-                <div class="field">
-                  <b><%= f.label :username%></b><br>
-                  <%= f.text_field :username, autofocus: false, value:current_user.username, class: 'form-control' %>
-                  <% if flash[:username_blank_error] %>
-                    <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:username_blank_error] %></p>
-                  <% end %>
-                  <% if flash[:username_exist_error] %>
-                    <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:username_exist_error]%></p>
-                  <% end %>
-                </div>
-                <div class="field">
-                  <b><%= f.label 'Personal Website' %></b><br>
-                  <%= f.text_field :website, autofocus: false, value: current_user.website, class: 'form-control' %>
-                  <% if flash[:website_error] %>
-                    <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:website_error]%></p>
-                  <% end %>
-                </div>
-                <div class="field">
-                  <b><%= f.label 'Age' %></b><br>
-                  <%= f.text_field :age, autofocus: false, value: current_user.age, class: 'form-control' %>
-                </div>
-                <div class="field">
-                  <b><%= f.label :nationality %></b><br>
-                  <%= f.text_field :nationality, autofocus: false, value: current_user.nationality, class: 'form-control' %>
-                </div>
-                <div><b>Current school level:</b> <i><%= current_user.school %></i></div>
-                <div class="field">
-                  <%= f.select :school, options_for_select(["High School Diploma", "Bsc", "Undergradueted", "Master", "PhD"]), {:include_blank => '--- Select your school level ---', :id => 'school-lv'}, { class: 'form-control'} %>
-                </div>
-                <div class="actions">
-                  <%= f.submit "Update", class: 'btn btn-danger' %>
-                </div>
-              <% end %>
-            </div>
-            </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a style="background-color: #E55;" class="navbar-brand mb-0 h1" href="#"><%= current_user.username %></a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger", :style => "color: white;") %>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="content">
+      <h1>PROFILE</h1>
+      <%= form_for(:user, url: profile_edit_path, html: {method: :put} ) do |f| %>
+        <div name = "avatar">
+          <% if current_user.avatar.attached? %>
+            <%= image_tag current_user.avatar.variant(resize: "200x200!"), class: "rounded" %>
+          <% else %>
+            <%= image_tag 'https://agrimachinery.nic.in/Images/User/User.png', width: "200", height: "200" %>
+          <% end %>
         </div>
-        
-        <!-- /#wrapper -->
+        <hr>
+        <div name = "avatar_field">
+          <%= f.file_field :avatar%>
+        </div>
+        <div class="field">
+          <b><%= f.label :username%></b><br>
+          <%= f.text_field :username, autofocus: false, value:current_user.username, class: 'form-control' %>
+          <% if flash[:username_blank_error] %>
+            <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:username_blank_error] %></p>
+          <% end %>
+          <% if flash[:username_exist_error] %>
+            <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:username_exist_error]%></p>
+          <% end %>
+        </div>
+        <div class="field">
+          <b><%= f.label :website %></b><br>
+          <%= f.text_field :website, autofocus: false, value: current_user.website, class: 'form-control' %>
+          <% if flash[:website_error] %>
+            <p class="notice" style="color: #cc0000; font-weight: bold"><%= flash[:website_error]%></p>
+          <% end %>
+        </div>
+        <div class="field">
+          <b><%= f.label :age %></b><br>
+          <%= f.text_field :age, autofocus: false, value: current_user.age, class: 'form-control' %>
+        </div>
+        <div class="field">
+          <b><%= f.label :nationality %></b><br>
+          <%= f.text_field :nationality, autofocus: false, value: current_user.nationality, class: 'form-control' %>
+        </div>
+        <div><b>Current school level:</b> <i><%= current_user.school %></i></div>
+        <div class="field">
+          <%= f.select :school, options_for_select(["High School Diploma", "Bsc", "Undergradueted", "Master", "PhD"]), {:include_blank => '--- Select your school level ---', :id => 'school-lv'}, { class: 'form-control'} %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Update", class: 'btn btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-        <!-- jQuery CDN - Slim version (=without AJAX) -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <!-- Popper.JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-        <!-- Bootstrap JS -->
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-        <!-- jQuery Custom Scroller CDN -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+<!-- /#wrapper -->
 
-        <!-- Menu Toggle Script -->
-        <script>
-            $("#menu-toggle").click(function(e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
-            });
-        </script>
-    </body>
+<!-- jQuery CDN - Slim version (=without AJAX) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!-- Popper.JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<!-- jQuery Custom Scroller CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!-- Menu Toggle Script -->
+<script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+</body>
 </html>

@@ -52,6 +52,10 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'cucumber-rails', require:false
   gem 'rspec-rails'
+  gem 'database_cleaner'
+  gem 'factory_bot_rails'
+  gem 'capybara'
+  gem 'rails-controller-testing'
 end
 
 group :development do
