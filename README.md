@@ -3,7 +3,7 @@
 
 ## Funzionalità
 L’applicazione ha lo scopo di tenere traccia delle **CTF svolte** da un team e di offrire statistiche a riguardo.
-Ogni **componente** di un **team** che partecipa ad una CTF, può segnalare all’**admin** del team di aver portato a termine una determinata *challenge* (indicane il tipo e i punti guadagnati), l’admin dovrà confermare la veridicità di tale affemazione con lo scopo di non permettere false attribuzioni.
+Ogni **componente** di un **team** che partecipa ad una CTF, può segnalare all’**admin** del team di aver portato a termine una determinata *challenge* (indicandone il tipo e i punti guadagnati), l’admin potrà confermare la veridicità della segnalazione con lo scopo di non permettere false attribuzioni.
 L’applicazione infine, fornirà **statistiche (correlate da grafici)** circa le varie CTF svolte, sia per ogni team che per ogni singolo componente.
 
 ## Info
