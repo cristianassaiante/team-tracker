@@ -109,6 +109,9 @@
                 </div>
             </div>
         <% else %>
+            <% if flash[:flag] %>
+                <p class="notice" style="color:#E55;font-size:120%; padding-top:2%; padding-left:2%"><%= flash[:flag] %></p>
+            <% end %>
             <div class="row content">
                 <div class="col" style="padding: 1%">
                     <div class="row">

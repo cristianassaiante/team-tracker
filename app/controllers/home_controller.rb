@@ -15,4 +15,9 @@ class HomeController < ApplicationController
             @minimum_password_length = 8
         end
     end
+    
+    def flag
+        flash[:flag] = "TT{d1d_u_kn0w_th4t_mhackeroni_r_g01n9_2_V3945?!?}"
+        redirect_to home_path
+    end
 end
