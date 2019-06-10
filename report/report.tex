@@ -110,7 +110,7 @@ I dati gestiti dall'applicazione saranno quindi quelli relativi alle \textbf{CTF
 
 \includepdf[pages=1, scale=0.75, pagecommand=\section{Diagramma E/R}]{ER}
 \section{Utenti e autorizzazioni}
-L'applicazione definisce due ruoli distinti, ognuno con le proprie funzionalità e permessi.\\ \\
+L'applicazione definisce tre ruoli distinti, ognuno con le proprie funzionalità e permessi.\\ \\
 L' \textbf{admin} può:
 \begin{itemize}
     \item Visualizzare le statistiche del team
@@ -132,6 +132,26 @@ L' \textbf{utente non registrato} può:
 \begin{itemize}
     \item Visualizzare tweet a tema CTF
 \end{itemize}
+
+\section{Piano dei test}
+I test dell'applicazione sono stati effettuati mediante 2 framework di testing: Cucumber e RSpec.
+\begin{itemize}
+    \item Cucumber: \\
+        Utilizzato per simulare il comportamento di un utente nell'atto di effettuare le operazioni
+        descritte nelle user stories e quindi, per testare suddette situazioni. \\
+        Per effettuare i test: \textit{cucumber ./features}
+    \item RSpec: \\
+        Utilizzato per gestire i test di controller e models: \\ 
+         - \textit{Controller}: vengono simulate delle situazioni appositamente generate per controllare il corretto
+         funzionamento dei controller, andando a controllare che il codice di ritorno della richiesta sia quello
+         previsto, che le pagine restituite siano quelle giuste e che compaiano su di esse tutti gli elementi 
+         previsti (es. messaggi di errore, messaggi di successo, mappe, etc) \\ 
+         - \textit{Models}: vengono simulate delle situazioni appositamente generate per verificare che l'inserimento
+         di tuple nel database sia effettuato se e solo se tutti i campi di un certo modello sono compilati
+         nel modo corretto \\
+        Per effettuare i test: \textit{rspec --format documentation}
+\end{itemize}
+
 \section{Link utili}
 \begin{itemize}
     \item Repository Github con codice sorgente: \\ \href{https://github.com/CristianRichie/team-tracker}{https://github.com/CristianRichie/team-tracker}
