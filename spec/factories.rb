@@ -17,6 +17,7 @@ FactoryBot.define do
   factory :chal1, class: Chal do
     name {"cucumber_chal"}
     points {"12000"}
+    categ {"Reverse"}
   end
 
   factory :team, class: Team do

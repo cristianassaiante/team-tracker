@@ -14,15 +14,18 @@ class TeamHomeController < ApplicationController
             
             @epoch = Time.now.to_i
             @start = @epoch - 2592000
-            @url = "https://ctftime.org/api/v1/events/?limit=100&start=%d&finish=%d" % [@start, @epoch]
-            @response = JSON.load(open(@url).read)
-            @len = @response.length
-            for offset in 0..@len-1
-                Ctf.where(name: @response[offset]['title'])
-                    .first_or_create(name: @response[offset]['title'], onsite: @response[offset]['onsite'], location: @response[offset]['location'])
-            end
-            
             @ctfs = Ctf.all.order("id desc").limit(5)
+            
+            if !@ctfs
+              @url = "https://ctftime.org/api/v1/events/?limit=100&start=%d&finish=%d" % [@start, @epoch]
+              @response = JSON.load(open(@url).read)
+              @len = @response.length
+              for offset in 0..@len-1
+                  Ctf.where(name: @response[offset]['title'])
+                      .first_or_create(name: @response[offset]['title'], onsite: @response[offset]['onsite'], location: @response[offset]['location'])
+              end
+              @ctfs = Ctf.all.order("id desc").limit(5)
+            end
             
             if current_user.is_admin
                 @challenges = ActiveRecord::Base.connection.execute("select chals.name as chal_name, chals.points as chal_points, ctfs.name as ctf_name, users.username as username, chals.id as chal_id from chals, solves,ctfs,users where solves.team_id = %d and solves.chal_id = chals.id and solves.is_pending = true and ctfs.id = chals.ctf_id and users.id = solves.user_id" % [@team.id]).as_json

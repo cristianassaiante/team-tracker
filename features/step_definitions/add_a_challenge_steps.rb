@@ -11,7 +11,9 @@ end
 
 When /I submit the add challenge form/ do
   click_on "Add challenge"
-  @chal1 = create(:chal1)
+  @ctf = create(:ctf)
+  @ctf.save
+  @chal1 = create(:chal1, ctf_id: @ctf.id)
   fill_in "chall_name", with: @chal1.name
   fill_in "points", with: @chal1.points
   click_button "Submit"
