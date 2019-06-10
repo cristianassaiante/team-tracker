@@ -51,12 +51,6 @@ ActiveRecord::Schema.define(version: 2019_06_01_095942) do
     t.index ["name"], name: "ctfs_name_key", unique: true
   end
 
-  create_table "partecipates", id: false, force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "ctf_id"
-    t.index ["team_id", "ctf_id"], name: "partecipates_team_id_ctf_id_key", unique: true
-  end
-
   create_table "solves", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "chal_id"
