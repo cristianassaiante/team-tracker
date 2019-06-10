@@ -11,6 +11,17 @@ class TeamHomeController < ApplicationController
         else
             @team = Team.find_by(id: current_user.team_id)
             @team_users = User.where(team_id: @team.id)
+            
+            @epoch = Time.now.to_i
+            @start = @epoch - 2592000
+            @url = "https://ctftime.org/api/v1/events/?limit=100&start=%d&finish=%d" % [@start, @epoch]
+            @response = JSON.load(open(@url).read)
+            @len = @response.length
+            for offset in 0..@len-1
+                Ctf.where(name: @response[offset]['title'])
+                    .first_or_create(name: @response[offset]['title'], onsite: @response[offset]['onsite'], location: @response[offset]['location'])
+            end
+            
             @ctfs = Ctf.all.order("id desc").limit(5)
             
             if current_user.is_admin

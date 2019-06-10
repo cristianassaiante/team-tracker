@@ -1,21 +1,22 @@
 class ChallengesController < ApplicationController
-require 'open-uri'
-skip_before_action :verify_authenticity_token
-before_action :authenticate_user!
+    require 'open-uri'
+    skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!
+
 def index
-   @epoch = Time.now.to_i
-   @start = @epoch - 2592000
-   @url = "https://ctftime.org/api/v1/events/?limit=100&start=%d&finish=%d" % [@start, @epoch]
-   @response = JSON.load(open(@url).read)
-   @x = []
-   @len = @response.length
-   for offset in 0..@len-1
-       @x.push(@response[offset]['title'])
-       Ctf.where(name: @response[offset]['title'])
-               .first_or_create(name: @response[offset]['title'], onsite: @response[offset]['onsite'], location: @response[offset]['location'])
-   end
-   @ctfs = @x
-   @team = Team.find_by(id: current_user.team_id)
+    @epoch = Time.now.to_i
+    @start = @epoch - 2592000
+    @url = "https://ctftime.org/api/v1/events/?limit=100&start=%d&finish=%d" % [@start, @epoch]
+    @response = JSON.load(open(@url).read)
+    @x = []
+    @len = @response.length
+    for offset in 0..@len-1
+        @x.push(@response[offset]['title'])
+        Ctf.where(name: @response[offset]['title'])
+                .first_or_create(name: @response[offset]['title'], onsite: @response[offset]['onsite'], location: @response[offset]['location'])
+    end
+    @ctfs = @x
+    @team = Team.find_by(id: current_user.team_id)
 end
 
 def create
