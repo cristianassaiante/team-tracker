@@ -47,3 +47,7 @@ bower.json
 # Ignore node_modules
 node_modules/
 
+# Ignore latex shit files
+report/*.log
+report/*.out
+report/*.aux
