@@ -1,75 +1,63 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style type="text/css">
+    .center-block {
+        position: relative;
+        left: 30%;
+        background-color: #E55;
+        padding: 5%;
+        border-radius: 20px;
+        width: 40%;
+    }
+    
+    #title {
+        text-align: center;
+        text-transform: uppercase;
+        font-family: "Lucida Console", Monaco, monospace;
+    }
+    
+    #blank-space {
+        padding: 5%;
+    }
 
-        <title> Log In </title>
+</style>
 
-        <style type="text/css">
-            .center-block {
-                position: relative;
-                left: 30%;
-                background-color: #E55;
-                padding: 5%;
-                border-radius: 20px;
-                width: 40%;
-            }
-            
-            #title {
-                text-align: center;
-                text-transform: uppercase;
-                font-family: "Lucida Console", Monaco, monospace;
-            }
-            
-            #blank-space {
-                padding: 5%;
-            }
-
-        </style>
-
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row-1" id="blank-space"><br></div>
-            <div class="row-1" id="title">
-                <a href="/home" style="color:#222; text-decoration: none;"><h1><b>Team Tracker<b></h1></a>
-            </div>
-            <div class="row-2">
-                <div class="center-block">
-                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|%>   
-                        <%= render "devise/shared/error_messages", resource: resource %>
-                        <% if flash[:login_error] %>
-                            <p class="notice" style="color:#212529;font-size:110%;"><%= flash[:login_error] %></p>
-                        <% end %>
-                        <p class="notice" style="color:#212529;font-size:110%;"><%= notice %></p>
-                        <p class="notice" style="color:#212529;font-size:110%;"><%= alert %></p>
-                        <div class="field form-group">
-                            <%= f.label :email %><br />
-                            <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>
-                        </div>
-
-                        <div class="field form-group">
-                            <%= f.label :password %>
-                            <%= f.password_field :password, autocomplete: "current-password", :class => "form-control", :placeholder => "Enter password" %>
-                        </div>
-                        
-                        <% if devise_mapping.rememberable? %>
-                            <div class="field">
-                            <%= f.label :remember_me, "Remember me" %>
-                            <%= f.check_box :remember_me, :class => "form-check" %> 
-                            </div>
-                        <% end %>
-
-                        <div class="actions form-group">
-                            <%= f.submit "Sign In", :class => "btn btn-block btn-danger" %>
-                        </div>
-                    <% end %>
-                    <%= link_to "Forgot password", "/users/password/new", :class => "btn btn-danger btn-block", :style => "color: white;" %>
+<div class="container-fluid">
+    <div class="row-1" id="blank-space"><br></div>
+    <div class="row-1" id="title">
+        <a href="/home" style="color:#222; text-decoration: none;"><h1><b>Team Tracker</b></h1></a>
+    </div>
+    <div class="row-2">
+        <div class="center-block">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|%>   
+                <%= render "devise/shared/error_messages", resource: resource %>
+                <% if flash[:login_error] %>
+                    <p class="notice" style="color:#212529;font-size:110%;"><%= flash[:login_error] %></p>
+                <% end %>
+                <p class="notice" style="color:#212529;font-size:110%;"><%= notice %></p>
+                <p class="notice" style="color:#212529;font-size:110%;"><%= alert %></p>
+                <div class="field form-group">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>
                 </div>
-            </div>
+
+                <div class="field form-group">
+                    <%= f.label :password %>
+                    <%= f.password_field :password, autocomplete: "current-password", :class => "form-control", :placeholder => "Enter password" %>
+                </div>
+                
+                <% if devise_mapping.rememberable? %>
+                    <div class="field">
+                    <%= f.label :remember_me, "Remember me" %>
+                    <%= f.check_box :remember_me, :class => "form-check" %> 
+                    </div>
+                <% end %>
+
+                <div class="actions form-group">
+                    <%= f.submit "Sign In", :class => "btn btn-block btn-danger" %>
+                </div>
+            <% end %>
+            <%= link_to "Forgot password", "/users/password/new", :class => "btn btn-danger btn-block", :style => "color: white;" %>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+

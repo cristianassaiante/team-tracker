@@ -1,178 +1,166 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style type="text/css">
+    body {
+        overflow-x: hidden;
+    }
 
-        <title> Home </title>
+    #header {
+        background-color: #E55;
+        text-transform: uppercase;
+    }
 
-        <style type="text/css">
+    .navbar-brand {
+        font-family: "Lucida Console", Monaco, monospace;
+    }
 
-            body {
-                overflow-x: hidden;
-            }
+    #team-logo {
+        text-decoration: none;
+        background-color: #E55;
+    }
 
-            #header {
-                background-color: #E55;
-                text-transform: uppercase;
-            }
+    <% if current_user.present? %>
+        .content {
+            padding: 5%;
+            padding-top: 10%;
+        }
+    <% else %>
+        .content {
+            padding: 5%;
+        }
+    <% end %>
 
-            .navbar-brand {
-                font-family: "Lucida Console", Monaco, monospace;
-            }
-            
-            #team-logo {
-                text-decoration: none;
-                background-color: #E55;
-            }
+    #tweets {
+        padding: 2%;
+        margin-right: 10%;
+    }
 
-            <% if current_user.present? %>
-                .content {
-                    padding: 5%;
-                    padding-top: 10%;
-                }
-            <% else %>
-                .content {
-                    padding: 5%;
-                }
-            <% end %>
+    #tweets a {
+        text-decoration: none;
+        background-color: white;
+        color: #000;
+    }
 
-            #tweets {
-                padding: 2%;
-                margin-right: 10%;
-            }
-            
-            #tweets a {
-                text-decoration: none;
-                background-color: white;
-                color: #000;
-            }
-            
-            #tweets a:hover {
-                color: #333;
-            }
-            
-            #tweets li {
-                border-bottom-style: solid;
-                border-bottom-color: #E55;
-                padding: 2%;
-            }
+    #tweets a:hover {
+        color: #333;
+    }
 
-            #register {
-                padding: 2%;
-                border-style: solid;
-                border-color: #E55;
-                border-radius: 20px;
-            }
-        </style>
+    #tweets li {
+        border-bottom-style: solid;
+        border-bottom-color: #E55;
+        padding: 2%;
+    }
 
-    </head>
-    <body>
-        <nav id="header" class="navbar navbar-static-top navbar-light">
-            <a id="team-logo" class="navbar-brand" href="/">Team Tracker</a>
-            <% if current_user.present? %>
-                <div style="margin-left: 70%; margin-top: 0.6%;"><label><%= current_user.username %></label></div>
-                <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger", :style => "color: white;") %>
-            <% else %>
-                <a style="color: white;" class="btn btn-danger" href="/login" role="button">Sign In</a>
-            <% end %>
-        </nav>           
-        <% if current_user.present? %>
-            <div class="row content">
-                <div class="col" style="padding: 1%">
-                    <h1 style="padding: 1%">Create a new team</h1>
-                    <form action="/team/create" method="POST">
-                        <div class="form-group">
-                            <label for="teamname">Team name</label>
-                            <input name="teamname" type="teamname" class="form-control" id="teamname" placeholder="Enter team name" required="required">
-                            <% if flash[:create_error] %>
-                                <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:create_error] %></p>
-                            <% end %>
-                        </div>
-                        <button type="submit" class="btn btn-danger">Create</button>
-                    </form>
-                </div>
-                <div class="col" style="padding: 1%">
-                    <h1 style="padding: 1%">Join an existing team</h1>
-                    <form action="/team/join" method="POST">
-                        <div class="form-group">
-                            <label for="teamtoken">Team token</label>
-                            <input name="teamtoken" type="teamtoken" class="form-control" id="teamtoken" placeholder="Enter team token" required="required">
-                            <% if flash[:join_error] %>
-                                <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:join_error] %></p>
-                            <% end %>
-                        </div>
-                        <button type="submit" class="btn btn-danger">Join</button>
-                    </form>
-                </div>
-            </div>
-        <% else %>
-            <% if flash[:flag] %>
-                <p class="notice" style="color:#E55;font-size:120%; padding-top:2%; padding-left:2%"><%= flash[:flag] %></p>
-            <% end %>
-            <div class="row content">
-                <div class="col" style="padding: 1%">
-                    <div class="row">
-                        <h1 align="center" style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
-                        <div id="tweets">
-                            <ul style="list-style-type: none;">
-                            <% @tweets.each do |tweet| %>
-                                <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}", target: "blank"%></li>
-                            <% end %>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col" id="register" style="padding: 1%">
-                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|%>
-                        <%= render "devise/shared/error_messages", resource: resource %>
-                        <% if flash[:password_error] %>
-                            <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:password_error] %></p>
-                        <% end %>
-                        <% if flash[:good_registration] %>
-                            <p class="notice" style="color:#000;font-size:110%;"><%= flash[:good_registration] %></p>
-                        <% end %>
-                        <div class="field form-group">
-                            <%= f.label :username %><br />
-                            <%= f.text_field :username, autofocus: true, autocomplete: "username", :class => "form-control", :placeholder => "Enter username", :required=>"required"%>
-                        </div>
-                        
-                        <div class="field form-group">
-                            <%= f.label :email %><br />
-                            <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>
-                        </div>
+    #register {
+        padding: 2%;
+        border-style: solid;
+        border-color: #E55;
+        border-radius: 20px;
+    }
+</style>
 
-                        <div class="field form-group">
-                            <%= f.label :password %>
-                            <% if @minimum_password_length %>
-                            <em>(<%= @minimum_password_length %> characters minimum)</em>
-                            <% end %><br />
-                            <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password", :pattern => "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", :title => "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", :required=>"required"%>
-                        </div>
 
-                        <div class="field form-group">
-                            <%= f.label :password_confirmation %><br />
-                            <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Re-Enter password", :required=>"required" %>
-                        </div>
-
-                        <div class="actions form-group">
-                            <%= f.submit "Sign up to TEAM TRACKER", :class => "btn btn-block btn-danger" %>
-                        </div>
+<nav id="header" class="navbar navbar-static-top navbar-light">
+    <a id="team-logo" class="navbar-brand" href="/">Team Tracker</a>
+    <% if current_user.present? %>
+        <div style="margin-left: 70%; margin-top: 0.6%;"><label><%= current_user.username %></label></div>
+        <%= link_to('Logout', destroy_user_session_path, method: :delete, :class => "btn btn-danger", :style => "color: white;") %>
+    <% else %>
+        <a style="color: white;" class="btn btn-danger" href="/login" role="button">Sign In</a>
+    <% end %>
+</nav>           
+<% if current_user.present? %>
+    <div class="row content">
+        <div class="col" style="padding: 1%">
+            <h1 style="padding: 1%">Create a new team</h1>
+            <form action="/team/create" method="POST">
+                <div class="form-group">
+                    <label for="teamname">Team name</label>
+                    <input name="teamname" type="teamname" class="form-control" id="teamname" placeholder="Enter team name" required="required">
+                    <% if flash[:create_error] %>
+                        <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:create_error] %></p>
                     <% end %>
-                    
-                    <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
-                    <div class="row">
-                        <div class="col">
-                          <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, style: "color: white;", class: "btn btn-danger btn-block", role: "button" %>
-                        </div>
-                        <div class="col">
-                            <%= link_to "Github", user_github_omniauth_authorize_path, style: "color: white;", class: "btn btn-danger btn-block", role: "button" %>
-                        </div>
-                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger">Create</button>
+            </form>
+        </div>
+        <div class="col" style="padding: 1%">
+            <h1 style="padding: 1%">Join an existing team</h1>
+            <form action="/team/join" method="POST">
+                <div class="form-group">
+                    <label for="teamtoken">Team token</label>
+                    <input name="teamtoken" type="teamtoken" class="form-control" id="teamtoken" placeholder="Enter team token" required="required">
+                    <% if flash[:join_error] %>
+                        <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:join_error] %></p>
+                    <% end %>
+                </div>
+                <button type="submit" class="btn btn-danger">Join</button>
+            </form>
+        </div>
+    </div>
+<% else %>
+    <% if flash[:flag] %>
+        <p class="notice" style="color:#E55;font-size:120%; padding-top:2%; padding-left:2%"><%= flash[:flag] %></p>
+    <% end %>
+    <div class="row content">
+        <div class="col" style="padding: 1%">
+            <div class="row">
+                <h1 align="center" style="text-transform: uppercase"> Keep track of your ctf statistics and those of your team!</h1>
+                <div id="tweets">
+                    <ul style="list-style-type: none;">
+                    <% @tweets.each do |tweet| %>
+                        <li><%= link_to tweet.text, "https://www.twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}", target: "blank"%></li>
+                    <% end %>
+                    </ul>
                 </div>
             </div>
-        <% end %>
-    </body>
-</html>
+        </div>
+        <div class="col" id="register" style="padding: 1%">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|%>
+                <%= render "devise/shared/error_messages", resource: resource %>
+                <% if flash[:password_error] %>
+                    <p class="notice" style="color:#E55;font-size:110%;"><%= flash[:password_error] %></p>
+                <% end %>
+                <% if flash[:good_registration] %>
+                    <p class="notice" style="color:#000;font-size:110%;"><%= flash[:good_registration] %></p>
+                <% end %>
+                <div class="field form-group">
+                    <%= f.label :username %><br />
+                    <%= f.text_field :username, autofocus: true, autocomplete: "username", :class => "form-control", :placeholder => "Enter username", :required=>"required"%>
+                </div>
+                
+                <div class="field form-group">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :placeholder => "Enter email address", :pattern => "[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$", :required=>"required" %>
+                </div>
+
+                <div class="field form-group">
+                    <%= f.label :password %>
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %><br />
+                    <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :placeholder => "Enter password", :pattern => "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,}", :title => "Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters", :required=>"required"%>
+                </div>
+
+                <div class="field form-group">
+                    <%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :placeholder => "Re-Enter password", :required=>"required" %>
+                </div>
+
+                <div class="actions form-group">
+                    <%= f.submit "Sign up to TEAM TRACKER", :class => "btn btn-block btn-danger" %>
+                </div>
+            <% end %>
+            
+            <p style="text-align: center; padding-top:2%;"> Or Sign In with </p>
+            <div class="row">
+                <div class="col">
+                    <%= link_to "Google", user_google_oauth2_omniauth_authorize_path, style: "color: white;", class: "btn btn-danger btn-block", role: "button" %>
+                </div>
+                <div class="col">
+                    <%= link_to "Github", user_github_omniauth_authorize_path, style: "color: white;", class: "btn btn-danger btn-block", role: "button" %>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>
+

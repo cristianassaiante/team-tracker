@@ -9,12 +9,12 @@ class TeamStatController < ApplicationController
             return
         end
         @team = Team.find_by(id: current_user.team_id)
-        @query = ActiveRecord::Base.connection.execute("select chals.name as chal_name, chals.categ as chal_cat, chals.points as chal_points from solves, chals where solves.team_id = %d and solves.chal_id = chals.id and solves.is_pending = false" % [@team.id]).as_json
+        @query = ActiveRecord::Base.connection.execute("select chals.name as chal_name, chals.categ as chal_cat, chals.points as chal_points, users.username as username, ctfs.name as ctf_name from solves, chals, users, ctfs where solves.team_id = %d and solves.chal_id = chals.id and solves.is_pending = false and users.id = solves.user_id and ctfs.id = chals.ctf_id" % [@team.id]).as_json
         @user_stat = [0,0,0,0,0]
         @user_chal = []
         @total = 0
         @query.each do |chal|
-           @user_chal.push({name: chal["chal_name"], points: chal["chal_points"]})
+           @user_chal.push({name: chal["chal_name"], points: chal["chal_points"], category: chal["chal_cat"], username: chal["username"], ctf_name: chal["ctf_name"]})
            case chal["chal_cat"]
               when "Reverse"
                   @user_stat[0] += chal["chal_points"].to_i

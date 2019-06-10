@@ -16,7 +16,7 @@ class TeamHomeController < ApplicationController
             @start = @epoch - 2592000
             @ctfs = Ctf.all.order("id desc").limit(5)
             
-            if !@ctfs
+            if @ctfs.length == 0
               @url = "https://ctftime.org/api/v1/events/?limit=100&start=%d&finish=%d" % [@start, @epoch]
               @response = JSON.load(open(@url).read)
               @len = @response.length

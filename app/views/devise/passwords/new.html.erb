@@ -1,59 +1,47 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<style type="text/css">
+    .center-block {
+        position: relative;
+        left: 30%;
+        background-color: #E55;
+        padding: 5%;
+        border-radius: 20px;
+        width: 40%;
+    }
+    
+    #title {
+        text-align: center;
+        text-transform: uppercase;
+        font-family: "Lucida Console", Monaco, monospace;
+    }
+    
+    #blank-space {
+        padding: 5%;
+    }
 
-        <title> Log In </title>
+</style>
 
-        <style type="text/css">
-            .center-block {
-                position: relative;
-                left: 30%;
-                background-color: #E55;
-                padding: 5%;
-                border-radius: 20px;
-                width: 40%;
-            }
-            
-            #title {
-                text-align: center;
-                text-transform: uppercase;
-                font-family: "Lucida Console", Monaco, monospace;
-            }
-            
-            #blank-space {
-                padding: 5%;
-            }
+<div class="container-fluid">
+    <div class="row-1" id="blank-space"><br></div>
+    <div class="row-1" id="title">
+        <a href="/home" style="color:#222; text-decoration: none;"><h1><b>Team Tracker</b></h1></a>
+    </div>
+    <div class="row-2">
+        <div class="center-block">
+            <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
 
-        </style>
-
-    </head>
-    <body>
-        <div class="container-fluid">
-            <div class="row-1" id="blank-space"><br></div>
-            <div class="row-1" id="title">
-                <a href="/home" style="color:#222; text-decoration: none;"><h1><b>Team Tracker<b></h1></a>
-            </div>
-            <div class="row-2">
-                <div class="center-block">
-                    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-                        <%= render "devise/shared/error_messages", resource: resource %>
-
-                        <div class="field">
-                            <%= f.label :email %><br />
-                            <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control" %>
-                        </div>
-
-                        <div class="actions">
-                            <%= f.submit "Send me reset password instructions", :class => "btn btn-danger btn-block" %>
-                        </div>
-                    <% end %>
+                <div class="field">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control" %>
                 </div>
-            </div>
+
+                <div class="actions">
+                    <%= f.submit "Send me reset password instructions", :class => "btn btn-danger btn-block" %>
+                </div>
+            <% end %>
         </div>
-    </body>
-</html>
+    </div>
+</div>
+ 
 
