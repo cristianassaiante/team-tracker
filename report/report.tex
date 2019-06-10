@@ -109,7 +109,29 @@ I dati gestiti dall'applicazione saranno quindi quelli relativi alle \textbf{CTF
 \includepdf[pages=2, scale=0.7]{mockup}
 
 \includepdf[pages=1, scale=0.75, pagecommand=\section{Diagramma E/R}]{ER}
-
+\section{Utenti e autorizzazioni}
+L'applicazione definisce due ruoli distinti, ognuno con le proprie funzionalità e permessi.\\ \\
+L' \textbf{admin} può:
+\begin{itemize}
+    \item Visualizzare le statistiche del team
+    \item Visualizzare le statistiche personali
+    \item Inserire le challenge risolte da lui
+    \item Accettare le challenge proposte dagli altri utenti
+    \item Modificare le politiche di submission di una challenge
+    \item Generare un token per permettere agli altri utenti di entrare nel proprio team
+    \item Bannare i membri del proprio team
+    \item Modificare il nome del team
+\end{itemize}
+L' \textbf{utente} può:
+\begin{itemize}
+    \item Visualizzare le statistiche del team
+    \item Visualizzare le statistiche personali
+    \item Proporre le challenge risolte da lui
+\end{itemize}
+L' \textbf{utente non registrato} può:
+\begin{itemize}
+    \item Visualizzare tweet a tema CTF
+\end{itemize}
 \section{Link utili}
 \begin{itemize}
     \item Repository Github con codice sorgente: \\ \href{https://github.com/CristianRichie/team-tracker}{https://github.com/CristianRichie/team-tracker}
