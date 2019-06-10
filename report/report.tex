@@ -138,13 +138,13 @@ I test dell'applicazione sono stati effettuati mediante 2 framework di testing: 
 \begin{itemize}
     \item Cucumber: \\
         Utilizzato per simulare il comportamento di un utente nell'atto di effettuare le operazioni
-        descritte nelle user stories e quindi, per testare suddette situazioni. \\
+        descritte nelle user stories e quindi, per testare le principali funzionalità dell'applicazione. \\
         Per effettuare i test: \textit{cucumber ./features}
     \item RSpec: \\
-        Utilizzato per gestire i test di controller e models: \\ 
-         - \textit{Controller}: vengono simulate delle situazioni appositamente generate per controllare il corretto
-         funzionamento dei controller, andando a controllare che il codice di ritorno della richiesta sia quello
-         previsto, che le pagine restituite siano quelle giuste e che compaiano su di esse tutti gli elementi 
+        Utilizzato per testare il corretto comportamento dell'applicazione da un punto di vista prettamente tecnico, in particolar modo sono analizzati controller e models: \\ 
+         - \textit{Controller}: vengono simulate delle situazioni appositamente generate per misurare il corretto
+         funzionamento dei controller, andando a verificare che il codice di ritorno della richiesta sia quello
+         previsto, che le modifiche alle entità apportare dalle azioni innescate dai controller siano eseguite e permanenti, che le pagine restituite siano quelle giuste e che compaiano su di esse tutti gli elementi 
          previsti (es. messaggi di errore, messaggi di successo, mappe, etc) \\ 
          - \textit{Models}: vengono simulate delle situazioni appositamente generate per verificare che l'inserimento
          di tuple nel database sia effettuato se e solo se tutti i campi di un certo modello sono compilati
